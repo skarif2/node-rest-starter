@@ -1,0 +1,22 @@
+{
+  "name": "node-rest-starter",
+  "version": "0.1.0-alpha-01",
+  "description": "A boilerplate for creating RESTful APIs Microservice in Node.js using Express and MongoDB.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skarif2/node-rest-starter.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Sk Arif",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skarif2/node-rest-starter/issues"
+  },
+  "homepage": "https://github.com/skarif2/node-rest-starter#readme"
+}
