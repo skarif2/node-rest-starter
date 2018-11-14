@@ -57,7 +57,7 @@
 
 ## To-Do
   - [x] ~~Readme file with a to-do~~
-  - [ ] Basic express app
+  - [x] Basic express app
   - [ ] Configuration file
   - [ ] dotenv support
   - [ ] Folder structure
