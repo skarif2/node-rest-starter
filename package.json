@@ -19,9 +19,13 @@
     "npm": ">=6.4.1"
   },
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "node"
-  ]
+  ],
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
