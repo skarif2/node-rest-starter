@@ -1,26 +1,27 @@
 const Joi = require('joi')
+const env = require('dotenv').config()
 
-// require and configure dotenv, will load vars in .env in PROCESS.ENV
-require('dotenv').config();
+console.log(Error)
 
-// define validation for all the env vars
+// Error on unsuccessful loading of .env
+if (env.error) {
+  throw new Error(`Problem loading .env file: ${env.error.message}`)
+}
+
+// Validation schema for .env
 const schema = Joi.object({
   NODE_ENV: Joi.string()
     .allow(['dev', 'prod', 'test', 'stage'])
-    .default('dev'),
+    .default('test'),
   PORT: Joi.number()
     .default(9100)
-}).unknown()
-  .required();
+}).unknown(false)
+  .required()
 
-const { error, value: env } = Joi.validate(process.env, schema);
+const { error, value } = Joi.validate(env.parsed, schema)
+
 if (error) {
-  throw new Error(`Config validation error: ${error.message}`);
+  throw new Error(`.env validation error: ${error.message}`)
 }
 
-const config = {
-  nodeEnv: env.NODE_ENV,
-  port: env.PORT
-};
-
-module.exports = config;
+module.exports = value
