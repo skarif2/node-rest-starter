@@ -58,8 +58,8 @@
 ## To-Do
   - [x] ~~Readme file with a to-do~~
   - [x] ~~Basic express app~~
-  - [ ] Configuration file
-  - [ ] dotenv support
+  - [x] ~~Configuration file~~
+  - [x] ~~dotenv support~~
   - [ ] Folder structure
   - [ ] Logger (readable logging, color)
   - [ ] Validation/param-validation
