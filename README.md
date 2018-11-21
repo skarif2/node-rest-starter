@@ -1,6 +1,15 @@
 # Node Rest Starter Kit 
 
 [![Build Status](https://travis-ci.com/skarif2/node-rest-starter.svg?branch=master)](https://travis-ci.com/skarif2/node-rest-starter)
+[![Coverage Status](https://coveralls.io/repos/github/skarif2/node-rest-starter/badge.svg?branch=master)](https://coveralls.io/github/skarif2/node-rest-starter?branch=master)
+
+<br>
+
+- coverage
+- commitizen
+- dependencies
+- license
+- support
 
 <br>
 
