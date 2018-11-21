@@ -1,5 +1,5 @@
 const express = require('express')
-const environment = require('./setup/environment')
+const environment = require('./config/environment')
 const app = express()
 const port = 9100
 
