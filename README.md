@@ -1,19 +1,6 @@
 # Node Rest Starter Kit 
 
-<p>
-  <a href="https://travis-ci.com/skarif2/node-rest-starter.svg?branch=master"></a>
-  <img src="" alt="travis">
-  <a href="#"></a>
-  <img src="" alt="coverage">
-  <a href="#"></a>
-  <img src="" alt="commitizen">
-  <a href="#"></a>
-  <img src="" alt="dependencies">
-  <a href="#"></a>
-  <img src="" alt="license">
-  <a href="#"></a>
-  <img src="" alt="support">
-</p>
+[![Build Status](https://travis-ci.com/skarif2/node-rest-starter.svg?branch=master)](https://travis-ci.com/skarif2/node-rest-starter)
 
 <br>
 
