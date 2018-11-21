@@ -60,7 +60,7 @@
   - [x] ~~Basic express app~~
   - [x] ~~Configuration file~~
   - [x] ~~dotenv support~~
-  - [ ] Folder structure
+  - [x] ~~Folder structure~~
   - [ ] Logger (readable logging, color)
   - [ ] Validation/param-validation
   - [ ] Database connectivity
