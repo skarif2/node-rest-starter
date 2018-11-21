@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.com/skarif2/node-rest-starter.svg?branch=master)](https://travis-ci.com/skarif2/node-rest-starter)
 [![Coverage Status](https://coveralls.io/repos/github/skarif2/node-rest-starter/badge.svg?branch=master)](https://coveralls.io/github/skarif2/node-rest-starter?branch=master)
+[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://img.shields.io/badge/license-MIT-green.svg)
 
 <br>
 
@@ -13,7 +14,7 @@
 
 <br>
 
-:fire: A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It is written in ES2015/ES6 with 95% code coverage and all the best practices in Javascript world to keep you more productive. tada: :tada:
+A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It is written in ES2015/ES6 with 95% code coverage and all the best practices in Javascript world to keep you more productive.
 
 ## Concept
   - Functional
