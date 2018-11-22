@@ -1,0 +1,13 @@
+env:
+  jest/globals: true
+plugins:
+  - jest
+extends:
+  - standard
+  - plugin:jest/recommended
+rules:
+  comma-dangle:
+    - error
+    - always
+  no-empty: warn
+  jest: true

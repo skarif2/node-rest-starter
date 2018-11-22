@@ -9,5 +9,5 @@ describe('misc specs', () => {
       const data = await testHelper.addition(1, 2)
       expect(data).toEqual(3)
     })
-  }) 
+  })
 })
