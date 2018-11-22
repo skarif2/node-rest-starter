@@ -1,8 +1,6 @@
 const Joi = require('joi')
 const env = require('dotenv').config()
 
-console.log(Error)
-
 // Error on unsuccessful loading of .env
 if (env.error) {
   throw new Error(`Problem loading .env file: ${env.error.message}`)
@@ -15,8 +13,9 @@ const schema = Joi.object({
     .default('dev'),
   PORT: Joi.number()
     .default(9100),
-  LOG_LEVEL: Joi.number().integer().min(0).max(5)
-    .default(0),
+  LOG_LEVEL: Joi.string().lowercase().trim()
+    .allow([ 'error', 'warn', 'info', 'verbose', 'debug', 'silly', ])
+    .default('info'),
 }).unknown(false)
 
 const { error, value, } = Joi.validate(env.parsed, schema)

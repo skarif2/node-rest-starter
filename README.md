@@ -65,3 +65,14 @@ A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It
   - [ ] Docker (Everyting)
   - [ ] Documentation
 
+## Logs
+  - `env.LOG_LEVEL` determines which level of logs to be printed on the console. See winston for more info
+  - only `env.NODE_ENV=prod` will save logs in ```__logs__``` folder
+  - `env.NODE_ENV` will generate no logs
+  - `dev` and `stage` should and will provide save level of logging
+  - `env.NODE_ENV` has no effect on logs levels but in `prod` all logs which will be saved in ```__logs__``` folder will have a log level of `info`
+  - `pretty-error` will print only errors with provided styles
+  - in `den` and `stage` morgan will print separate logs with `req` and `res` info using `winston`
+  - in `prod` no logs will be printed by `morgan` on the console if the `env.LOG_LEVEL` is set to `error`
+  - by default in `prod` saved logs has a max file size of `20mb` and log-files will be deleted once it is `15 days` old which can be changed by editing `/config/logger.js`
+

@@ -1,33 +1,49 @@
-const winston = require('winston')
-// const DailyRotateFile = require('winston-daily-rotate-file')
+
+const fs = require('fs')
+const { createLogger, format, transports, } = require('winston')
+const { prettyPrint, } = format
+require('winston-daily-rotate-file')
 
 const env = require('./environment')
+const logdir = '__logs__'
 
-// winston.addColors({
-//   silly: 'magenta',
-//   debug: 'blue',
-//   verbose: 'cyan',
-//   info: 'green',
-//   warn: 'yellow',
-//   error: 'red',
-// })
+let logger
 
-// winston.remove(winston.transports.Console)
-
-// winston.add(winston.transports.Console, {
-//   level: env.LOG_LEVEL,
-//   prettyPrint: true,
-//   colorize: true,
-//   silent: false,
-//   timestamp: true,
-// })
-
-const logger = winston.createLogger({
-  level: env.LOG_LEVEL,
-  format: winston.format.json(),
-  transports: [
-    new winston.transports.Console(),
-  ],
-})
+if (env.NODE_ENV !== 'prod') {
+  logger = createLogger({
+    level: env.LOG_LEVEL,
+    transports: [
+      new transports.Console(),
+    ],
+    format: prettyPrint(),
+  })
+} else {
+  if (!fs.existsSync(logdir)) {
+    fs.mkdirSync(logdir)
+  }
+  logger = createLogger({
+    transports: [
+      new transports.Console({
+        level: env.LOG_LEVEL,
+        handleExceptions: true,
+        json: true,
+        colorize: true,
+      }),
+      new transports.DailyRotateFile({
+        level: 'info',
+        handleExceptions: true,
+        prepend: true,
+        dirname: logdir,
+        filename: 'info-%DATE%.log',
+        datePattern: 'YYYY-MM-DD-HH',
+        maxSize: '20m',
+        maxFiles: '15d',
+      }),
+    ],
+  })
+  logger.stream = {
+    write: message => logger.info(message.trim()),
+  }
+}
 
 module.exports = logger
