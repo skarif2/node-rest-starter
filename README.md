@@ -40,7 +40,7 @@ A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It
   |File Upload|multer|some summery|
   |Http-request|node-fetch|some summery|
   |Http Status Code|http-status|some summery|
-  |Logger|morgan, winston, pretty-logger|some summery|
+  |Logger|morgan, winston, pretty-error|some summery|
   |Route>Controller>Model|express|some summery|
   |Serialization|-|some summery|
   |Security|helmet, cors, csrf|some summery|
@@ -53,7 +53,7 @@ A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It
   - [x] ~~Configuration file~~
   - [x] ~~dotenv support~~
   - [x] ~~Folder structure~~
-  - [ ] Logger (readable logging, color)
+  - [x] ~~Logger (readable logging, color)~~
   - [ ] Validation/param-validation
   - [ ] Database connectivity
   - [ ] Eslint support
