@@ -1,10 +1,4 @@
-const express = require('express')
-const environment = require('./config/environment')
-const app = express()
-const port = 9100
+const env = require('./config/environment')
+const app = require('./config/express')
 
-console.log(environment)
-
-app.get('/', (req, res) => res.send('Hello from Node-Rest-Starter!'))
-
-app.listen(port, () => console.log(`Node-Rest-Starter app listening on port ${port}!`))
+app.listen(env.PORT, () => console.info(`node-rest-starter app listening on port ${env.PORT} :: ${env.NODE_ENV} server`))

@@ -9,11 +9,6 @@
 
 <br>
 
-- commitizen
-- support
-
-<br>
-
 A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It is written in ES2015/ES6 with 95% code coverage and all the best practices in Javascript world to keep you more productive.
 
 ## Concept

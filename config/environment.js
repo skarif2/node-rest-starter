@@ -10,15 +10,16 @@ if (env.error) {
 
 // Validation schema for .env
 const schema = Joi.object({
-  NODE_ENV: Joi.string()
-    .allow(['dev', 'prod', 'test', 'stage'])
-    .default('test'),
+  NODE_ENV: Joi.string().lowercase().trim()
+    .allow([ 'dev', 'prod', 'test', 'stage', ])
+    .default('dev'),
   PORT: Joi.number()
-    .default(9100)
+    .default(9100),
+  LOG_LEVEL: Joi.number().integer().min(0).max(5)
+    .default(0),
 }).unknown(false)
-  .required()
 
-const { error, value } = Joi.validate(env.parsed, schema)
+const { error, value, } = Joi.validate(env.parsed, schema)
 
 if (error) {
   throw new Error(`.env validation error: ${error.message}`)
