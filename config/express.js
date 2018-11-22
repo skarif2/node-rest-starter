@@ -9,14 +9,44 @@ const morgan = require('morgan')
 const methodOverride = require('method-override')
 // const validation = require('express-validation')
 const expressWinston = require('express-winston')
+const PrettyError = require('pretty-error')
 
 const env = require('./environment')
 const winstonInstance = require('./logger')
 const routes = require('./router')
 
-require('pretty-error').start()
-
 const app = express()
+const prettyError = new PrettyError()
+prettyError.appendStyle({
+  'pretty-error > header > title > kind': {
+    display: 'none',
+  },
+  'pretty-error > header > colon': {
+    'display': 'none',
+  },
+  'pretty-error > header > message': {
+    'color': 'bright-white',
+    'background': 'bright-red',
+    'padding': '0 1',
+  },
+  'pretty-error > trace > item': {
+    'marginLeft': 2,
+    'bullet': '"<cyan> • </cyan>"',
+  },
+  'pretty-error > trace > item > header > pointer > file': {
+    'color': 'bright-cyan',
+  },
+  'pretty-error > trace > item > header > pointer > colon': {
+    'color': 'cyan',
+  },
+  'pretty-error > trace > item > header > pointer > line': {
+    'color': 'bright-cyan',
+  },
+  'pretty-error > trace > item > header > what': {
+    'color': 'bright-white',
+  },
+})
+prettyError.start()
 
 if (env.NODE_ENV === 'dev') {
   app.use(morgan('dev'))
