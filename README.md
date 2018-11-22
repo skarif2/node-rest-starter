@@ -5,7 +5,6 @@
 [![Dependencies](https://david-dm.org/skarif2/node-rest-starter/status.svg)](https://david-dm.org/skarif2/node-rest-starter)
 [![Maintainability](https://api.codeclimate.com/v1/badges/05aac0c011555564f95e/maintainability)](https://codeclimate.com/github/skarif2/nodejs-api-starter/maintainability)
 [![Inline docs](http://inch-ci.org/github/skarif2/node-rest-starter.svg?branch=master)](http://inch-ci.org/github/skarif2/node-rest-starter)
-
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://img.shields.io/badge/license-MIT-brightgreen.svg)
 
 <br>
