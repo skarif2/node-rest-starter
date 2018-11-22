@@ -1,8 +1,9 @@
 # Node Rest Starter Kit 
 
-[![Build Status](https://travis-ci.com/skarif2/node-rest-starter.svg?branch=master)](https://travis-ci.com/skarif2/node-rest-starter)
-[![Coverage Status](https://coveralls.io/repos/github/skarif2/node-rest-starter/badge.svg?branch=master)](https://coveralls.io/github/skarif2/node-rest-starter?branch=master)
-[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://img.shields.io/badge/license-MIT-green.svg)
+[![Build](https://travis-ci.com/skarif2/node-rest-starter.svg?branch=master)](https://travis-ci.com/skarif2/node-rest-starter)
+[![Coverage](https://coveralls.io/repos/github/skarif2/node-rest-starter/badge.svg?branch=master)](https://coveralls.io/github/skarif2/node-rest-starter?branch=master)
+[![Dependencies](https://david-dm.org/skarif2/node-rest-starter/status.svg)](https://david-dm.org/skarif2/node-rest-starter)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://img.shields.io/badge/license-MIT-brightgreen.svg)
 
 <br>
 
