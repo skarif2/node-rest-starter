@@ -36,7 +36,7 @@ app.use(cors())
 app.use(helmet())
 app.use(methodOverride())
 
-// enable detailed API logging in dev env
+// enable detailed API logging in all env except test
 if (env.NODE_ENV !== 'test') {
   expressWinston.requestWhitelist.push('body')
   expressWinston.responseWhitelist.push('body')
@@ -48,6 +48,10 @@ if (env.NODE_ENV !== 'test') {
   }))
 }
 
+/**
+ * @apiDescription Mounts api routes at /api
+ * @apiGroup API
+ */
 app.use('/api', routes)
 
 // catch 404 and forward to error handler
