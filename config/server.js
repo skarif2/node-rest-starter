@@ -13,6 +13,7 @@ const expressWinston = require('express-winston')
 const env = require('./environment')
 const winstonInstance = require('./logger')
 const prettyError = require('./prettyerror')
+const routes = require('../src/index.route')
 
 const app = express()
 
@@ -46,6 +47,8 @@ if (env.NODE_ENV !== 'test') {
     colorStatus: true, // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
   }))
 }
+
+app.use('/api', routes)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

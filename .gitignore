@@ -14,3 +14,6 @@ node_modules
 
 # coverage directory
 coverage
+
+# log folders
+__logs__
