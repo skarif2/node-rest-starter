@@ -16,6 +16,16 @@ const schema = Joi.object({
   LOG_LEVEL: Joi.string().lowercase().trim()
     .allow([ 'error', 'warn', 'info', 'verbose', 'debug', 'silly', ])
     .default('info'),
+  LOG_LEVEL_FILE: Joi.string().lowercase().trim()
+    .allow([ 'error', 'warn', 'info', 'verbose', 'debug', 'silly', ])
+    .default('info'),
+  LOG_LEVEL_CONSOLE: Joi.string().lowercase().trim()
+    .allow([ 'error', 'warn', 'info', 'verbose', 'debug', 'silly', ])
+    .default('info'),
+  LOGGLY_INPUT_TOKEN: Joi.string().trim()
+    .required(true),
+  LOGGLY_SUBDOMAIN: Joi.string().trim()
+    .required(true),
 }).unknown(false)
 
 const { error, value, } = Joi.validate(env.parsed, schema)

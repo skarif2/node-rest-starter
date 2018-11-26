@@ -1,20 +1,17 @@
 const fs = require('fs')
-const {
-  createLogger,
-  transports,
-} = require('winston')
+const winston = require('winston')
 require('winston-daily-rotate-file')
 require('winston-loggly-bulk')
 
 const env = require('./environment')
 const logdir = '__logs__'
 
-const transporter = []
+const transports = []
 
 /**
  * Add Console Transport
  */
-transporter.push(new transports.Console({
+transports.push(new winston.transports.Console({
   level: env.LOG_LEVEL_CONSOLE,
   colorize: true,
   prettyPrint: true,
@@ -28,7 +25,8 @@ if (env.NODE_ENV === 'prod') {
   if (!fs.existsSync(logdir)) {
     fs.mkdirSync(logdir)
   }
-  transporter.push(new transports.DailyRotateFile({
+  transports.push(new winston.transports.DailyRotateFile({
+    dirname: logdir,
     filename: 'info-%DATE%.log',
     level: env.LOG_LEVEL_FILE,
     timestamp: true,
@@ -39,7 +37,8 @@ if (env.NODE_ENV === 'prod') {
     maxFiles: '15d',
   }))
 
-  transporter.push(new transports.DailyRotateFile({
+  transports.push(new winston.transports.DailyRotateFile({
+    dirname: logdir,
     filename: 'error-%DATE%.log',
     level: 'error',
     timestamp: true,
@@ -54,22 +53,25 @@ if (env.NODE_ENV === 'prod') {
 }
 
 /**
- * Add Loggly Transport (https://www.loggly.com/)
+ * Create logger instance
  */
-if (env.NODE_ENV === 'prod') {
-  transporter.push(new transports.Loggly({
-    inputToken: env.LOGGLY_INPUT_TOKEN,
-    subdomain: env.LOGGLY_SUBDOMAIN,
-    tags: [ 'node-rest-starter', ],
-    json: true,
-  }))
-}
-
-const logger = createLogger({
+const logger = winston.createLogger({
   level: env.LOG_LEVEL,
-  transports: transporter,
+  transports: transports,
   exitOnError: false,
 })
+
+/**
+ * Add Loggly Transport (https://www.loggly.com/)
+ */
+// if (env.NODE_ENV === 'prod') {
+//   logger.add(window.transports.Loggly, {
+//     inputToken: env.LOGGLY_INPUT_TOKEN,
+//     subdomain: env.LOGGLY_SUBDOMAIN,
+//     tags: [ 'node-rest-starter', ],
+//     json: true,
+//   })
+// }
 
 module.exports = {
   logger,
