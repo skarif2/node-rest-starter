@@ -8,6 +8,8 @@ if (env.error) {
 
 // Validation schema for .env
 const schema = Joi.object({
+  APP_NAME: Joi.string()
+    .default('node-rest-starter'),
   NODE_ENV: Joi.string().lowercase().trim()
     .allow([ 'dev', 'prod', 'test', 'stage', ])
     .default('dev'),

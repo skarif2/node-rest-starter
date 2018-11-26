@@ -51,16 +51,16 @@ app.use(helmet.ieNoOpen())
 app.use(helmet.hidePoweredBy())
 
 // enable detailed API logging in all env except test
-if (env.NODE_ENV !== 'test') {
-  expressWinston.requestWhitelist.push('body')
-  expressWinston.responseWhitelist.push('body')
-  app.use(expressWinston.logger({
-    winstonInstance: logger,
-    meta: true, // optional: log meta data about request (defaults to true)
-    msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
-    colorStatus: true, // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
-  }))
-}
+// if (env.NODE_ENV !== 'test') {
+//   expressWinston.requestWhitelist.push('body')
+//   expressWinston.responseWhitelist.push('body')
+//   app.use(expressWinston.logger({
+//     winstonInstance: logger,
+//     meta: true, // optional: log meta data about request (defaults to true)
+//     msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
+//     colorStatus: true, // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
+//   }))
+// }
 
 /**
  * Mounts api routes at /api
