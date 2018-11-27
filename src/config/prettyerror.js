@@ -32,6 +32,4 @@ instance.appendStyle({
   },
 })
 
-module.exports = {
-  instance,
-}
+module.exports = instance
