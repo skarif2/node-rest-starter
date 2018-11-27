@@ -8,8 +8,6 @@ const log = console.log
 
 log(chalk.green(`[[ Server starting at ${moment(new Date()).format('YYYY-MM-DD HH:mm:ss.SSS')} >_ ]]`))
 
-// app.listen(env.PORT, () => console.info(chalk.red(`Your ${env.NODE_ENV} server is ready and listening on port: ${env.PORT} >_`)))
-
 app.listen(env.PORT, () => {
   log('')
   log(chalk.red(`${chalk.bold(env.APP_NAME)} v${env.APP_VERSION} started!`))
