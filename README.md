@@ -55,9 +55,9 @@ A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It
   - [x] ~~Folder structure~~
   - [x] ~~Logger (readable logging, color)~~
   - [x] ~~Validation/param-validation~~
-  - [ ] Database connectivity
-  - [ ] Eslint support
-  - [ ] Security modules
+  - [x] ~~Database connectivity~~
+  - [x] ~~Eslint support~~
+  - [x] ~~Security modules~~
   - [ ] User's CRUD api
   - [ ] Auth api for user (JWT)
   - [ ] Error response (HTTP-Status)
