@@ -54,7 +54,7 @@ A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It
   - [x] ~~dotenv support~~
   - [x] ~~Folder structure~~
   - [x] ~~Logger (readable logging, color)~~
-  - [ ] Validation/param-validation
+  - [x] ~~Validation/param-validation~~
   - [ ] Database connectivity
   - [ ] Eslint support
   - [ ] Security modules

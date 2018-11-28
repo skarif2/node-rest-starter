@@ -6,8 +6,10 @@ module.exports = {
    * @apiGroup User
    */
   create: {
-    username: Joi.string().required(),
-    mombileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required(),
-    password: Joi.string().required(),
+    body: {
+      username: Joi.string().required(),
+      mombileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required(),
+      password: Joi.string().required(),
+    },
   },
 }
