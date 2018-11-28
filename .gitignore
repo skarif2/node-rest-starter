@@ -17,3 +17,6 @@ coverage
 
 # log folders
 __logs__
+
+# .DS_Store
+.DS_Store
