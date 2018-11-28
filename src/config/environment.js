@@ -19,8 +19,16 @@ const schema = Joi.object({
     .default(9100),
   IP: Joi.string()
     .default('0.0.0.0'),
-  DB_URI: Joi.string()
-    .default('mongoose://localhost:27017/node-rest-starter'),
+  MONGO_URI: Joi.string()
+    .default('mongoose://localhost/'),
+  MONGO_DBNAME: Joi.string()
+    .default('node-rest-starter'),
+  MONGO_DEBUG: Joi.boolean()
+    .when('NODE_ENV', {
+      is: Joi.string().equal('dev'),
+      then: Joi.boolean().default(true),
+      otherwise: Joi.boolean().default(false),
+    }),
   LOG_LEVEL: Joi.string().lowercase().trim()
     .allow([ 'error', 'warn', 'info', 'verbose', 'debug', 'silly', ])
     .default('info'),

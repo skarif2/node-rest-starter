@@ -41,6 +41,7 @@
     "joi": "^14.1.0",
     "method-override": "^3.0.0",
     "moment": "^2.22.2",
+    "mongoose": "^5.3.13",
     "morgan": "^1.9.1",
     "pretty-error": "^2.1.1",
     "stream": "0.0.2",
