@@ -14,9 +14,6 @@ const expressWinston = require('express-winston')
 const env = require('./environment')
 const { logger, } = require('./winston')
 const routes = require('../index.route')
-const prettyError = require('./prettyerror')
-
-prettyError.start()
 
 const app = express()
 

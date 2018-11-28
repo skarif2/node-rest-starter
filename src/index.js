@@ -1,3 +1,6 @@
+const prettyError = require('./config/prettyerror')
+prettyError.start()
+
 const chalk = require('chalk')
 const moment = require('moment')
 const env = require('./config/environment')
@@ -10,7 +13,7 @@ mongoose.connection.on('connected', () => {
   log(chalk.yellow('\nConnected to MongoDB!'))
   log(chalk.green(`\n[[ Server starting at ${moment(new Date()).format('YYYY-MM-DD HH:mm:ss.SSS')} >_ ]]`))
   app.listen(env.PORT, () => {
-    log(chalk.red(`\n${chalk.bold(env.APP_NAME)} v${env.APP_VERSION} started!`))
+    log(chalk.red(`\n${chalk.bold(env.APP_NAME)} has started!`))
     log('-----------------------------')
     log(`Environment:\t${chalk.underline.bold(env.NODE_ENV)}`)
     log(`IP:\t\t${env.IP}`)
