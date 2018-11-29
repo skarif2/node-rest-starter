@@ -13,7 +13,7 @@ let logger
  */
 if (env.NODE_ENV !== 'prod') {
   logger = createLogger({
-    level: env.LOG_LEVEL_CONSOLE,
+    level: env.LOG_LEVEL,
     transports: [
       new transports.Console(),
     ],
@@ -26,7 +26,7 @@ if (env.NODE_ENV !== 'prod') {
   logger = createLogger({
     transports: [
       new transports.Console({
-        level: env.LOG_LEVEL_CONSOLE,
+        level: env.LOG_LEVEL,
         handleExceptions: true,
         json: true,
         colorize: true,

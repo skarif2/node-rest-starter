@@ -1,6 +1,6 @@
 const { Router, } = require('express')
 const validate = require('express-validation')
-const expressJwt = require('express-jwt')
+const guard = require('express-jwt')
 
 const userParam = require('./user.param')
 const userCtrl = require('./user.controller')
@@ -46,7 +46,7 @@ router.route('/:userId')
    * @apiSuccess {Object} user Details of user
    * @apiError {Object} error Error response
    */
-  .get(expressJwt({ secret: env.JET_SECRET, }),
+  .get(guard({ secret: env.JET_SECRET, }),
     validate(userParam.get),
     userCtrl.get)
 
@@ -62,7 +62,7 @@ router.route('/:userId')
    * @apiSuccess {Object} users List of users
    * @apiError {Object} error Error response
    */
-  .post(expressJwt({ secret: env.JET_SECRET, }),
+  .post(guard({ secret: env.JET_SECRET, }),
     validate(userParam.update),
     userCtrl.update)
 
@@ -76,7 +76,7 @@ router.route('/:userId')
    * @apiSuccess {Object} user Deleted user details
    * @apiError {Object} error Error response
    */
-  .delete(expressJwt({ secret: env.JET_SECRET, }),
+  .delete(guard({ secret: env.JET_SECRET, }),
     validate(userParam.remove),
     userCtrl.remove)
 

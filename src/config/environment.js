@@ -28,12 +28,6 @@ const schema = Joi.object({
   LOG_LEVEL: Joi.string().lowercase().trim()
     .allow([ 'error', 'warn', 'info', 'verbose', 'debug', 'silly', ])
     .default('info'),
-  LOG_LEVEL_FILE: Joi.string().lowercase().trim()
-    .allow([ 'error', 'warn', 'info', 'verbose', 'debug', 'silly', ])
-    .default('info'),
-  LOG_LEVEL_CONSOLE: Joi.string().lowercase().trim()
-    .allow([ 'error', 'warn', 'info', 'verbose', 'debug', 'silly', ])
-    .default('info'),
   JET_SECRET: Joi.string()
     .required(true),
 }).unknown(false)
