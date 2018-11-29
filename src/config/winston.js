@@ -64,6 +64,4 @@ if (env.NODE_ENV !== 'prod') {
   // }
 }
 
-module.exports = {
-  logger,
-}
+module.exports = logger

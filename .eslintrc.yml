@@ -9,5 +9,6 @@ rules:
   comma-dangle:
     - error
     - always
+  no-param-reassign: error
   no-empty: warn
   jest: true

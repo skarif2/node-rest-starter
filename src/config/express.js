@@ -12,7 +12,7 @@ const validation = require('express-validation')
 const expressWinston = require('express-winston')
 
 const env = require('./environment')
-const { logger, } = require('./winston')
+const logger = require('./winston')
 const routes = require('../index.route')
 const APIError = require('../libs/APIError')
 
@@ -47,7 +47,9 @@ app.use(helmet.frameguard())
 app.use(helmet.ieNoOpen())
 app.use(helmet.hidePoweredBy())
 
-// enable detailed API logging in all env except test
+/**
+ * Enable detailed API logging in all env except test
+ */
 if (env.NODE_ENV !== 'test') {
   expressWinston.requestWhitelist.push('body')
   expressWinston.responseWhitelist.push('body')
