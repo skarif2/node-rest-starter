@@ -1,3 +1,6 @@
+const httpStatus = require('http-status')
+const APIError = require('../../libs/APIError')
+
 function load (req, res, next) {
   console.log('OK :: load user')
   next()
@@ -8,8 +11,9 @@ function create (req, res, next) {
 }
 
 function list (req, res, next) {
-  console.log('headers', req.headers)
-  res.json('OK :: user list')
+  const err = new APIError('Awesome error', httpStatus.UNAUTHORIZED)
+  // res.json('OK :: user list')
+  next(err)
 }
 
 function get (req, res, next) {

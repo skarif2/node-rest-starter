@@ -26,6 +26,7 @@
     "node"
   ],
   "dependencies": {
+    "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
     "compression": "^1.7.3",

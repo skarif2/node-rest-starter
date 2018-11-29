@@ -60,7 +60,7 @@ A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It
   - [x] ~~Security modules~~
   - [ ] User's CRUD api
   - [ ] Auth api for user (JWT)
-  - [ ] Error response (HTTP-Status)
+  - [x] ~~Error response (HTTP-Status)~~
   - [ ] File Upload
   - [ ] Docker (Everyting)
   - [ ] Documentation
