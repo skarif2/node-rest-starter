@@ -7,31 +7,30 @@ const User = require('../user/user.model')
 
 /**
  * Returns jwt token if valid useranme and password is provided
- * @param {Object} req request object
- * @param {Object} res response object
- * @param {Object} next next object
+ * @property {string} req.body.username username of user
+ * @property {string} req.body.password password of user
  * @returns {<{token, user}, Error>}
  */
-function login (req, res, next) {
-  User.findOne({ username: req.body.username, })
-    .then((user) => {
-      if (bcrypt.compareSync(req.body.password, user.password)) {
-        const token = JWToken.create({
+async function login (req, res, next) {
+  try {
+    const user = await User.findOne({ username: req.body.username, })
+    if (bcrypt.compareSync(req.body.password, user.password)) {
+      const token = JWToken.create({
+        username: user.username,
+        mobileNumber: user.mobileNumber,
+      }, '20m')
+      return res.json({
+        token,
+        user: {
           username: user.username,
           mobileNumber: user.mobileNumber,
-        }, '20m')
-        return res.json({
-          token,
-          user: {
-            username: user.username,
-            mobileNumber: user.mobileNumber,
-          },
-        })
-      }
-      const err = new APIError('Authentication error!', httpStatus.UNAUTHORIZED, true)
-      return next(err)
-    })
-    .catch(e => next(e))
+        },
+      })
+    }
+    throw new APIError('Authentication error!', httpStatus.UNAUTHORIZED, true)
+  } catch (e) {
+    next(e)
+  }
 }
 
 module.exports = {
