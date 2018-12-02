@@ -28,8 +28,7 @@ const schema = Joi.object({
   LOG_LEVEL: Joi.string().lowercase().trim()
     .allow([ 'error', 'warn', 'info', 'verbose', 'debug', 'silly', ])
     .default('info'),
-  JET_SECRET: Joi.string()
-    .required(true),
+  JET_SECRET: Joi.string().required(),
 }).unknown(false)
 
 const { error, value, } = Joi.validate(env.parsed, schema)

@@ -1,8 +1,6 @@
-const httpStatus = require('http-status')
-const bcrypt = require('bcryptjs')
 const _ = require('lodash')
+const bcrypt = require('bcryptjs')
 
-const APIError = require('../../libs/APIError')
 const User = require('./user.model')
 
 const salt = bcrypt.genSaltSync(10)
@@ -34,14 +32,14 @@ function get (req, res, next) {
  * @property {string} req.body.username username of user
  * @property {string} req.body.mobileNumber mobileNumber of user
  * @property {string} req.body.password password of user
- * @returns {<{user}, Error>}
+ * @returns {<User, Error>}
  */
 async function create (req, res, next) {
   try {
     const user = new User({
-      username: req.username,
-      mobileNumber: req.mobileNumber,
-      password: bcrypt.hashSync(req.password, salt),
+      username: req.body.username,
+      mobileNumber: req.body.mobileNumber,
+      password: bcrypt.hashSync(req.body.password, salt),
     })
     const savedUser = await user.save()
     const sendUser = _.pick(savedUser, [ '_id', 'username', 'mobileNumber', ])
@@ -55,7 +53,7 @@ async function create (req, res, next) {
  * Update user
  * @property {string} req.params.userId _id of user
  * @property {string} req.body.mobileNumber mobileNumber of user
- * @returns {<{user}, Error>}
+ * @returns {<User, Error>}
  */
 async function update (req, res, next) {
   try {
@@ -69,12 +67,27 @@ async function update (req, res, next) {
   }
 }
 
-function list (req, res, next) {
-  const err = new APIError('Awesome error', httpStatus.UNAUTHORIZED)
-  // res.json('OK :: user list')
-  next(err)
+/**
+ * List users
+ * @property {string} req.params.limit number of users to be listed
+ * @property {string} req.params.skip number of users to be skipped
+ * @returns {<User[], Error>}
+ */
+async function list (req, res, next) {
+  const { limit = 50, skip = 0, } = req.query
+  try {
+    const users = await User.list({ limit, skip, })
+    return res.json(users)
+  } catch (e) {
+    next(e)
+  }
 }
 
+/**
+ * Delete user
+ * @property {string} req.params.userId _id of user
+ * @returns {<User, Error>}
+ */
 async function remove (req, res, next) {
   try {
     const user = req.user

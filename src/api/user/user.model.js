@@ -1,18 +1,20 @@
 const Promise = require('bluebird')
-const { Schema, model, } = require('mongoose')
+const mongoose = require('mongoose')
 
 /**
  * User Schema
  */
-const UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
+    index: {
+      unique: true,
+    },
   },
   mobileNumber: {
     type: String,
     required: true,
-    match: [ /^[1-9][0-9]{9}$/, 'The value of path {PATH} ({VALUE}) is not a valid mobile number.', ],
   },
   password: {
     type: String,
@@ -27,28 +29,25 @@ const UserSchema = new Schema({
 /**
  * Methods
  */
-UserSchema.methods({})
+UserSchema.method({
+})
 
 /**
  * Statics
  */
-UserSchema.statics({
+UserSchema.statics = {
   /**
    * Get User
    * @param {ObjectId} id - _id of user
    * @returns {Promise<User, Error>}
    */
   async get (id) {
-    const result = await this.findById(id)
-      .exec()
-      .then((user) => {
-        if (user) {
-          return user
-        }
-        const err = new Error('No such user exists!')
-        return Promise.reject(err)
-      })
-    return result
+    const user = await this.findById(id).exec()
+    if (user) {
+      return user
+    }
+    const err = new Error('No such user exists!')
+    return Promise.reject(err)
   },
 
   /**
@@ -58,16 +57,17 @@ UserSchema.statics({
    * @returns {Promise<User[], Error>}
    */
   async list ({ skip = 0, limit = 50, } = {}) {
-    const result = await this.find()
+    const users = await this.find()
+      .select('-password')
       .sort({ createdAt: -1, })
       .skip(+skip)
       .limit(+limit)
       .exec()
-    return result
+    return users
   },
-})
+}
 
 /**
  * @typedef User
  */
-module.exports = model('User', UserSchema)
+module.exports = mongoose.model('User', UserSchema)

@@ -3,10 +3,10 @@ const env = require('../config/environment')
 
 /**
  * Create JSON Web Token
- * @param {Object} data data payload for jwt
+ * @param {Object} payload payload for jwt
  * @param {String} expiresIn expire time i.e. '1d', '1h' or '20m'
  */
-const create = (data, expiresIn) => jwt.sign({ data, }, env.JWT_SECRET, { expiresIn, })
+const create = (payload, expiresIn) => jwt.sign(payload, env.JET_SECRET, { expiresIn, })
 
 /**
  * Get payload data from JWT

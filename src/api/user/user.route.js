@@ -11,7 +11,7 @@ const router = Router()
 router.route('/')
   /**
    * @api {get} /api/users Get list of users
-   * @apiName User List
+   * @apiName List Users
    * @apiGroup User
    *
    * @apiParam none
@@ -19,7 +19,7 @@ router.route('/')
    * @apiSuccess {Array} users List of users
    * @apiError {Object} error Error response
    */
-  .get(userCtrl.list)
+  .get(validate(userParam.list), userCtrl.list)
 
   /**
    * @api {post} /api/users Create new user
@@ -46,23 +46,22 @@ router.route('/:userId')
    * @apiSuccess {Object} user Details of user
    * @apiError {Object} error Error response
    */
-  .get(guard({ secret: env.JET_SECRET, }),
+  .get(guard({ secret: env.JET_SECRET, requestProperty: 'auth', }),
     validate(userParam.get),
     userCtrl.get)
 
   /**
-   * @api {put} /api/users/:userId Update user details
+   * @api {patch} /api/users/:userId Update user details
    * @apiName Update User
    * @apiGroup User
    *
    * @apiParam (param) {String} userId _id of user
    * @apiParam (body) {String} mobileNumber Mobile number of user
-   * @apiParam (body) {String} password Password of user
    *
    * @apiSuccess {Object} users List of users
    * @apiError {Object} error Error response
    */
-  .post(guard({ secret: env.JET_SECRET, }),
+  .patch(guard({ secret: env.JET_SECRET, requestProperty: 'auth', }),
     validate(userParam.update),
     userCtrl.update)
 
@@ -76,7 +75,7 @@ router.route('/:userId')
    * @apiSuccess {Object} user Deleted user details
    * @apiError {Object} error Error response
    */
-  .delete(guard({ secret: env.JET_SECRET, }),
+  .delete(guard({ secret: env.JET_SECRET, requestProperty: 'auth', }),
     validate(userParam.remove),
     userCtrl.remove)
 

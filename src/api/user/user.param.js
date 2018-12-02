@@ -8,7 +8,7 @@ module.exports = {
   create: {
     body: {
       username: Joi.string().required(),
-      mombileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required(),
+      mobileNumber: Joi.string().required(),
       password: Joi.string().required(),
     },
   },
@@ -38,8 +38,18 @@ module.exports = {
       userId: Joi.string().required(),
     },
     body: {
-      mombileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required(),
-      password: Joi.string().required(),
+      mobileNumber: Joi.string().required(),
+    },
+  },
+
+  /**
+   * @apiName List Users
+   * @apiGroup User
+   */
+  list: {
+    query: {
+      skip: Joi.string().required(),
+      limit: Joi.string().required(),
     },
   },
 

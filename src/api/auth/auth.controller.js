@@ -15,10 +15,11 @@ async function login (req, res, next) {
   try {
     const user = await User.findOne({ username: req.body.username, })
     if (bcrypt.compareSync(req.body.password, user.password)) {
-      const token = JWToken.create({
+      const payload = {
         username: user.username,
         mobileNumber: user.mobileNumber,
-      }, '20m')
+      }
+      const token = JWToken.create(payload, '20m')
       return res.json({
         token,
         user: {
