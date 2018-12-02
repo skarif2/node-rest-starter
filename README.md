@@ -58,8 +58,8 @@ A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It
   - [x] ~~Database connectivity~~
   - [x] ~~Eslint support~~
   - [x] ~~Security modules~~
-  - [ ] User's CRUD api
-  - [ ] Auth api for user (JWT)
+  - [x] ~~User's CRUD api~~
+  - [x] ~~Auth api for user (JWT)~~
   - [x] ~~Error response (HTTP-Status)~~
   - [ ] File Upload
   - [ ] Docker (Everyting)
