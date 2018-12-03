@@ -1,6 +1,5 @@
 const bodyParser = require('body-parser')
 const compression = require('compression')
-const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const express = require('express')
 const helmet = require('helmet')
@@ -26,14 +25,14 @@ app.use(bodyParser.json())
 
 app.use(methodOverride())
 
-app.use(cookieParser())
-
 if (env.NODE_ENV === 'dev') {
   let stream = new Stream()
   stream.writable = true
   stream.write = data => logger.debug(data)
   app.use(morgan('dev', { stream, }))
 }
+
+// app.use(morgan('dev'))
 
 app.use(cors())
 
@@ -62,6 +61,11 @@ if (env.NODE_ENV !== 'test') {
 }
 
 /**
+ * Mounts api routes at /api
+ */
+app.use('/api', routes)
+
+/**
  * If error is not an instanceOf APIError, convert it.
  */
 app.use((err, req, res, next) => {
@@ -76,11 +80,6 @@ app.use((err, req, res, next) => {
   }
   return next(err)
 })
-
-/**
- * Mounts api routes at /api
- */
-app.use('/api', routes)
 
 /**
  * Catch 404 and forward to error handler
