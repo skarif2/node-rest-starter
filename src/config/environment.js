@@ -15,10 +15,12 @@ const schema = Joi.object({
     .default('dev'),
   PORT: Joi.number()
     .default(9100),
-  MONGO_URI: Joi.string()
-    .default('mongoose://localhost/'),
-  MONGO_DBNAME: Joi.string()
-    .default('node-rest-starter'),
+  MONGO_URI: Joi.string().required()
+    .description('Mongo DB host url'),
+  MONGO_DBNAME: Joi.string().required()
+    .description('Mongo DB database name'),
+  MONGO_PORT: Joi.string().required()
+    .description('Mongo DB port'),
   MONGO_DEBUG: Joi.boolean()
     .when('NODE_ENV', {
       is: Joi.string().equal('dev'),
@@ -28,7 +30,8 @@ const schema = Joi.object({
   LOG_LEVEL: Joi.string().lowercase().trim()
     .allow([ 'error', 'warn', 'info', 'verbose', 'debug', 'silly', ])
     .default('info'),
-  JET_SECRET: Joi.string().required(),
+  JET_SECRET: Joi.string().required()
+    .description('JWT Secret required to sign'),
 }).unknown(false)
 
 const { error, value, } = Joi.validate(env.parsed, schema)

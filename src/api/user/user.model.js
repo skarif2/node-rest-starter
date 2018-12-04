@@ -62,7 +62,7 @@ UserSchema.statics = {
     if (user) {
       return user
     }
-    const err = new APIError('No such user exists!', httpStatus.NOT_FOUND)
+    const err = new APIError('No such user exists!', httpStatus.BAD_REQUEST)
     return Promise.reject(err)
   },
 

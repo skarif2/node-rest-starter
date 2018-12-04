@@ -20,6 +20,7 @@
   },
   "scripts": {
     "start": "node ./src/index.js",
+    "docker": "sudo sh ./bin/dev.sh",
     "test": "jest"
   },
   "keywords": [

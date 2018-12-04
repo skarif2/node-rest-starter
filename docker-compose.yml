@@ -1,0 +1,40 @@
+version: '3.6'
+
+services:
+  node:
+    build:
+      context: .
+
+    volumes:
+      # Mounts the project directory on the host to /app inside the container,
+      # allowing you to modify the code without having to rebuild the image.
+      - .:/app
+      # Just specify a path and let the Engine create a volume.
+      # Data present in the base image at the specified mount point will be copied
+      # over to the new volume upon volume initialization.
+      # node_modules from this new volume will be used and not from your local dev env.
+      - /app/node_modules/
+
+    # Expose ports [HOST:CONTAINER}
+    ports:
+      - '9100:9100'
+
+    # Set environment variables from this file
+    env_file:
+      - .env
+
+    # Overwrite any env var defined in .env file (if required)
+    environment:
+      - MONGO_URI='mongodb://mongo/'
+      - DEBUG=node-rest-starter:*
+
+    # Link to containers in another service.
+    # Links also express dependency between services in the same way as depends_on,
+    # so they determine the order of service startup.
+    links:
+      - mongo
+
+  mongo:
+      image: 'mongo:4.0.4'
+      ports:
+        - "27017:27017"
