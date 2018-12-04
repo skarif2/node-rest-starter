@@ -61,8 +61,8 @@ A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It
   - [x] ~~User's CRUD api~~
   - [x] ~~Auth api for user (JWT)~~
   - [x] ~~Error response (HTTP-Status)~~
-  - [ ] File Upload
-  - [ ] Docker (Everyting)
+  - [ ] ~~File Upload~~
+  - [x] ~~Docker (Everyting)~~
   - [ ] Documentation
 
 ## Logs
@@ -74,5 +74,5 @@ A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It
   - `pretty-error` will print only errors with provided styles
   - in `den` and `stage` morgan will print separate logs with `req` and `res` info using `winston`
   - in `prod` no logs will be printed by `morgan` on the console if the `env.LOG_LEVEL` is set to `error`
-  - by default in `prod` saved logs has a max file size of `20mb` and log-files will be deleted once it is `15 days` old which can be changed by editing `/config/logger.js`
+  - by default in `prod` saved logs has a max file size of `20mb` and log-files will be deleted once it is `15 days` old which can be changed by editing `/config/winston.js`
 
