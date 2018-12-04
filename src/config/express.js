@@ -6,9 +6,9 @@ const helmet = require('helmet')
 const crossdomain = require('helmet-crossdomain')
 const morgan = require('morgan')
 const methodOverride = require('method-override')
-const { Stream, } = require('stream')
 const validation = require('express-validation')
 const expressWinston = require('express-winston')
+const httpStatus = require('http-status')
 
 const env = require('./environment')
 const logger = require('./winston')
@@ -25,14 +25,11 @@ app.use(bodyParser.json())
 
 app.use(methodOverride())
 
-if (env.NODE_ENV === 'dev') {
-  let stream = new Stream()
-  stream.writable = true
-  stream.write = data => logger.debug(data)
-  app.use(morgan('dev', { stream, }))
+if (env.NODE_ENV === 'prod') {
+  app.use(morgan('dev', { stream: logger.stream, }))
+} else {
+  app.use(morgan('dev'))
 }
-
-// app.use(morgan('dev'))
 
 app.use(cors())
 
@@ -57,6 +54,7 @@ if (env.NODE_ENV !== 'test') {
     meta: true, // optional: log meta data about request (defaults to true)
     msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
     colorStatus: true, // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
+    colorize: true,
   }))
 }
 
@@ -64,6 +62,14 @@ if (env.NODE_ENV !== 'test') {
  * Mounts api routes at /api
  */
 app.use('/api', routes)
+
+/**
+ * Catch 404 and forward to error handler
+ */
+app.use((req, res, next) => {
+  const err = new APIError('API not found!', httpStatus.NOT_FOUND)
+  return next(err)
+})
 
 /**
  * If error is not an instanceOf APIError, convert it.
@@ -78,14 +84,6 @@ app.use((err, req, res, next) => {
     const apiError = new APIError(err.message, err.status, err.isPublic)
     return next(apiError)
   }
-  return next(err)
-})
-
-/**
- * Catch 404 and forward to error handler
- */
-app.use((req, res, next) => {
-  const err = new Error('API not found!')
   return next(err)
 })
 

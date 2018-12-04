@@ -1,3 +1,6 @@
+/**
+ * Prettify every error log
+ */
 const prettyError = require('./config/prettyerror')
 prettyError.start()
 

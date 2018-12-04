@@ -1,5 +1,7 @@
 const Promise = require('bluebird')
 const mongoose = require('mongoose')
+const httpStatus = require('http-status')
+const APIError = require('../../libs/APIError')
 
 /**
  * User Schema
@@ -46,7 +48,21 @@ UserSchema.statics = {
     if (user) {
       return user
     }
-    const err = new Error('No such user exists!')
+    const err = new APIError('No such user exists!', httpStatus.NOT_FOUND)
+    return Promise.reject(err)
+  },
+
+  /**
+   * Get User
+   * @param {Object} params - params to find user with
+   * @returns {Promise<User, Error>}
+   */
+  async getOne (params) {
+    const user = await this.findOne(params).exec()
+    if (user) {
+      return user
+    }
+    const err = new APIError('No such user exists!', httpStatus.NOT_FOUND)
     return Promise.reject(err)
   },
 
