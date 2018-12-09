@@ -6,7 +6,8 @@ const env = require('../config/environment')
  * @param {Object} payload payload for jwt
  * @param {String} expiresIn expire time i.e. '1d', '1h' or '20m'
  */
-const create = (payload, expiresIn) => jwt.sign(payload, env.JET_SECRET, { expiresIn })
+const create = (payload, expiresIn) => jwt.sign(payload,
+  env.JET_SECRET, { expiresIn })
 
 /**
  * Get payload data from JWT
