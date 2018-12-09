@@ -5,7 +5,6 @@ const httpStatus = require('http-status')
 const APIError = require('../libs/APIError')
 const JWToken = require('../libs/JWToken')
 
-// async/await can be used.
 describe('libs specs', () => {
   describe('APIError specs', () => {
     test('should be instance of APIError', async () => {

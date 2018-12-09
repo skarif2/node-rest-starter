@@ -21,6 +21,7 @@
   "scripts": {
     "start": "node ./src/index.js",
     "docker": "sudo sh ./bin/dev.sh",
+    "docker-test": "sudo sh ./bin/test.sh",
     "test": "jest"
   },
   "keywords": [
