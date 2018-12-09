@@ -17,20 +17,40 @@ const APIError = require('../libs/APIError')
 
 const app = express()
 
-app.use(compression())
+/**
+ * Set application port to listen to
+ */
 app.set('port', env.PORT)
 
-app.use(bodyParser.urlencoded({ extended: true, }))
+/**
+ * Middleware to compress respose bodies
+ */
+app.use(compression())
+
+/**
+ * Middleware to parese req.body data
+ */
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+/**
+ * Enables HTTP verbs such as PUT or DELETE in places
+ * where the client doesn't support it
+ */
 app.use(methodOverride())
 
+/**
+ * Set morgan environment for logging
+ */
 if (env.NODE_ENV === 'prod') {
-  app.use(morgan('dev', { stream: logger.stream, }))
+  app.use(morgan('dev', { stream: logger.stream }))
 } else {
   app.use(morgan('dev'))
 }
 
+/**
+ * Enables cross-origin resource sharing
+ */
 app.use(cors())
 
 /**
@@ -54,7 +74,7 @@ if (env.NODE_ENV !== 'test') {
     meta: true, // optional: log meta data about request (defaults to true)
     msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
     colorStatus: true, // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
-    colorize: true,
+    colorize: true
   }))
 }
 

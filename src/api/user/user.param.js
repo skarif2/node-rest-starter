@@ -9,8 +9,8 @@ module.exports = {
     body: {
       username: Joi.string().required(),
       mobileNumber: Joi.string().required(),
-      password: Joi.string().required(),
-    },
+      password: Joi.string().required()
+    }
   },
 
   /**
@@ -19,11 +19,11 @@ module.exports = {
    */
   get: {
     headers: {
-      authorization: Joi.string().required(),
+      authorization: Joi.string().required()
     },
     params: {
-      userId: Joi.string().required(),
-    },
+      userId: Joi.string().required()
+    }
   },
 
   /**
@@ -32,14 +32,14 @@ module.exports = {
    */
   update: {
     headers: {
-      authorization: Joi.string().required(),
+      authorization: Joi.string().required()
     },
     params: {
-      userId: Joi.string().required(),
+      userId: Joi.string().required()
     },
     body: {
-      mobileNumber: Joi.string().required(),
-    },
+      mobileNumber: Joi.string().required()
+    }
   },
 
   /**
@@ -49,8 +49,8 @@ module.exports = {
   list: {
     query: {
       skip: Joi.string().required(),
-      limit: Joi.string().required(),
-    },
+      limit: Joi.string().required()
+    }
   },
 
   /**
@@ -59,10 +59,10 @@ module.exports = {
    */
   remove: {
     headers: {
-      authorization: Joi.string().required(),
+      authorization: Joi.string().required()
     },
     params: {
-      userId: Joi.string().required(),
-    },
-  },
+      userId: Joi.string().required()
+    }
+  }
 }

@@ -7,5 +7,5 @@ describe('suth specs', () => {
       const data = await (1 + 2)
       expect(data).toEqual(3)
     })
-  }) 
+  })
 })

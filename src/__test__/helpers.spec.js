@@ -1,6 +1,6 @@
 'use strict'
 
-const testHelper = require('../helpers/TESTHelper')
+const testHelper = require('../libs/TESTHelper')
 
 // async/await can be used.
 describe('misc specs', () => {

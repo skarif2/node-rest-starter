@@ -11,21 +11,21 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     index: {
-      unique: true,
-    },
+      unique: true
+    }
   },
   mobileNumber: {
     type: String,
-    required: true,
+    required: true
   },
   password: {
     type: String,
-    required: true,
+    required: true
   },
   createdAt: {
     type: Date,
-    default: Date.now,
-  },
+    default: Date.now
+  }
 })
 
 /**
@@ -72,15 +72,15 @@ UserSchema.statics = {
    * @param {number} limit - Limit number of users to be returned
    * @returns {Promise<User[], Error>}
    */
-  async list ({ skip = 0, limit = 50, } = {}) {
+  async list ({ skip = 0, limit = 50 } = {}) {
     const users = await this.find()
       .select('-password')
-      .sort({ createdAt: -1, })
+      .sort({ createdAt: -1 })
       .skip(+skip)
       .limit(+limit)
       .exec()
     return users
-  },
+  }
 }
 
 /**

@@ -1,14 +1,15 @@
 env:
   jest/globals: true
 plugins:
+  - node
+  - promise
   - jest
 extends:
   - standard
+  - plugin:node/recommended
+  - plugin:promise/recommended
   - plugin:jest/recommended
 rules:
-  comma-dangle:
-    - error
-    - always
   no-param-reassign: error
   no-empty: warn
   jest: true

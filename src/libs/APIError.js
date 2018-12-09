@@ -18,8 +18,8 @@ APIError.prototype = Object.create(Error.prototype, {
     value: Error,
     enumerable: false,
     writable: true,
-    configurable: true,
-  },
+    configurable: true
+  }
 })
 
 if (Object.setPrototypeOf) {

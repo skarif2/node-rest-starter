@@ -11,7 +11,7 @@ const schema = Joi.object({
   APP_NAME: Joi.string()
     .default('node-rest-starter'),
   NODE_ENV: Joi.string().lowercase().trim()
-    .allow([ 'dev', 'prod', 'test', 'stage', ])
+    .allow(['dev', 'prod', 'test', 'stage'])
     .default('dev'),
   PORT: Joi.number()
     .default(9100),
@@ -25,16 +25,16 @@ const schema = Joi.object({
     .when('NODE_ENV', {
       is: Joi.string().equal('dev'),
       then: Joi.boolean().default(true),
-      otherwise: Joi.boolean().default(false),
+      otherwise: Joi.boolean().default(false)
     }),
   LOG_LEVEL: Joi.string().lowercase().trim()
-    .allow([ 'error', 'warn', 'info', 'verbose', 'debug', 'silly', ])
+    .allow(['error', 'warn', 'info', 'verbose', 'debug', 'silly'])
     .default('info'),
   JET_SECRET: Joi.string().required()
-    .description('JWT Secret required to sign'),
+    .description('JWT Secret required to sign')
 }).unknown(false)
 
-const { error, value, } = Joi.validate(env.parsed, schema)
+const { error, value } = Joi.validate(env.parsed, schema)
 
 if (error) {
   throw new Error(`.env validation error: ${error.message}`)

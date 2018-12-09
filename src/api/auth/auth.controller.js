@@ -13,19 +13,19 @@ const User = require('../user/user.model')
  */
 async function login (req, res, next) {
   try {
-    const user = await User.getOne({ username: req.body.username, })
+    const user = await User.getOne({ username: req.body.username })
     if (bcrypt.compareSync(req.body.password, user.password)) {
       const payload = {
         username: user.username,
-        mobileNumber: user.mobileNumber,
+        mobileNumber: user.mobileNumber
       }
       const token = JWToken.create(payload, '20m')
       return res.json({
         token,
         user: {
           username: user.username,
-          mobileNumber: user.mobileNumber,
-        },
+          mobileNumber: user.mobileNumber
+        }
       })
     }
     throw new APIError('Authentication error!', httpStatus.UNAUTHORIZED, true)
@@ -35,5 +35,5 @@ async function login (req, res, next) {
 }
 
 module.exports = {
-  login,
+  login
 }

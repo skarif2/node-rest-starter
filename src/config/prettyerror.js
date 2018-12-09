@@ -4,32 +4,32 @@ const instance = new PrettyError()
 
 instance.appendStyle({
   'pretty-error > header > title > kind': {
-    display: 'none',
+    display: 'none'
   },
   'pretty-error > header > colon': {
-    'display': 'none',
+    'display': 'none'
   },
   'pretty-error > header > message': {
     'color': 'bright-white',
     'background': 'bright-red',
-    'padding': '0 1',
+    'padding': '0 1'
   },
   'pretty-error > trace > item': {
     'marginLeft': 2,
-    'bullet': '"<cyan> • </cyan>"',
+    'bullet': '"<cyan> • </cyan>"'
   },
   'pretty-error > trace > item > header > pointer > file': {
-    'color': 'bright-cyan',
+    'color': 'bright-cyan'
   },
   'pretty-error > trace > item > header > pointer > colon': {
-    'color': 'cyan',
+    'color': 'cyan'
   },
   'pretty-error > trace > item > header > pointer > line': {
-    'color': 'bright-cyan',
+    'color': 'bright-cyan'
   },
   'pretty-error > trace > item > header > what': {
-    'color': 'bright-white',
-  },
+    'color': 'bright-white'
+  }
 })
 
 module.exports = instance

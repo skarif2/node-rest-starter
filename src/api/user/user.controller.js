@@ -23,7 +23,7 @@ async function load (req, res, next, id) {
  */
 function get (req, res, next) {
   const user = req.user
-  const sendUser = _.pick(user, [ '_id', 'username', 'mobileNumber', ])
+  const sendUser = _.pick(user, ['_id', 'username', 'mobileNumber'])
   return res.json(sendUser)
 }
 
@@ -39,10 +39,10 @@ async function create (req, res, next) {
     const user = new User({
       username: req.body.username,
       mobileNumber: req.body.mobileNumber,
-      password: bcrypt.hashSync(req.body.password, salt),
+      password: bcrypt.hashSync(req.body.password, salt)
     })
     const savedUser = await user.save()
-    const sendUser = _.pick(savedUser, [ '_id', 'username', 'mobileNumber', ])
+    const sendUser = _.pick(savedUser, ['_id', 'username', 'mobileNumber'])
     return res.json(sendUser)
   } catch (e) {
     next(e)
@@ -60,7 +60,7 @@ async function update (req, res, next) {
     const user = req.user
     user.mobileNumber = req.body.mobileNumber
     const savedUser = await user.save()
-    const sendUser = _.pick(savedUser, [ '_id', 'username', 'mobileNumber', ])
+    const sendUser = _.pick(savedUser, ['_id', 'username', 'mobileNumber'])
     return res.json(sendUser)
   } catch (e) {
     next(e)
@@ -74,9 +74,9 @@ async function update (req, res, next) {
  * @returns {<User[], Error>}
  */
 async function list (req, res, next) {
-  const { limit = 50, skip = 0, } = req.query
+  const { limit = 50, skip = 0 } = req.query
   try {
-    const users = await User.list({ limit, skip, })
+    const users = await User.list({ limit, skip })
     return res.json(users)
   } catch (e) {
     next(e)
@@ -92,7 +92,7 @@ async function remove (req, res, next) {
   try {
     const user = req.user
     const deletedUser = await user.remove()
-    const sendUser = _.pick(deletedUser, [ '_id', 'username', 'mobileNumber', ])
+    const sendUser = _.pick(deletedUser, ['_id', 'username', 'mobileNumber'])
     return res.json(sendUser)
   } catch (e) {
     next(e)
@@ -105,5 +105,5 @@ module.exports = {
   create,
   list,
   update,
-  remove,
+  remove
 }

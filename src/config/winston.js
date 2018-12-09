@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { createLogger, format, transports, } = require('winston')
+const { createLogger, format, transports } = require('winston')
 require('winston-daily-rotate-file')
 
 const env = require('./environment')
@@ -14,9 +14,9 @@ if (env.NODE_ENV !== 'prod') {
   logger = createLogger({
     level: env.LOG_LEVEL,
     transports: [
-      new transports.Console(),
+      new transports.Console()
     ],
-    format: format.prettyPrint(),
+    format: format.prettyPrint()
   })
 } else {
   if (!fs.existsSync(logdir)) {
@@ -28,7 +28,7 @@ if (env.NODE_ENV !== 'prod') {
         level: env.LOG_LEVEL,
         handleExceptions: true,
         json: true,
-        colorize: true,
+        colorize: true
       }),
       new transports.DailyRotateFile({
         level: 'info',
@@ -41,12 +41,12 @@ if (env.NODE_ENV !== 'prod') {
         maxFiles: '15d',
         timestamp: true,
         json: false,
-        humanReadableUnhandledException: true,
-      }),
-    ],
+        humanReadableUnhandledException: true
+      })
+    ]
   })
   logger.stream = {
-    write: message => logger.info(message.trim()),
+    write: message => logger.info(message.trim())
   }
 }
 
