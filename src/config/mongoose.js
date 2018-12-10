@@ -19,7 +19,6 @@ mongoose.Promise = Promise
  * enable 'useCreateIndex' for mongoose
  */
 const mongoOption = {
-  dbName: env.MONGO_DBNAME,
   useCreateIndex: true,
   keepAlive: true,
   useNewUrlParser: true,
@@ -29,7 +28,7 @@ const mongoOption = {
 /**
  * connect to mongo db
  */
-const mongoUri = env.MONGO_URI
+const mongoUri = env.MONGO_HOST
 mongoose.connect(mongoUri, mongoOption)
 mongoose.connection.on('error', () => {
   throw new Error(`Unable to connect to database: ${mongoUri}`)

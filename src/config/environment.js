@@ -15,10 +15,8 @@ const schema = Joi.object({
     .default('dev'),
   PORT: Joi.number()
     .default(9100),
-  MONGO_URI: Joi.string().required()
+  MONGO_HOST: Joi.string().required()
     .description('Mongo DB host url'),
-  MONGO_DBNAME: Joi.string().required()
-    .description('Mongo DB database name'),
   MONGO_PORT: Joi.string().required()
     .description('Mongo DB port'),
   MONGO_DEBUG: Joi.boolean()
