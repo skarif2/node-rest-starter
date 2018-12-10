@@ -28,9 +28,10 @@ describe('User API specs', () => {
         .send(user)
         .expect(httpStatus.OK)
         .then((res) => {
+          expect(res.body).toHaveProperty('_id')
           expect(res.body.username).toEqual(user.username)
           expect(res.body.mobileNumber).toEqual(user.mobileNumber)
-          expect(res.body).not.toHaveProperty('password', user.password)
+          expect(res.body).not.toHaveProperty('password')
           user = res.body
           return done()
         })
@@ -56,7 +57,6 @@ describe('User API specs', () => {
 
   describe('GET /api/users/:userId', () => {
     test('should get user details', async (done) => {
-      user = await User.findOne({ username: user.username })
       supertest(app)
         .get(`/api/users/${user._id}`)
         .set('Authorization', `Bearer ${token}`)
@@ -64,7 +64,7 @@ describe('User API specs', () => {
         .then((res) => {
           expect(res.body.username).toEqual(user.username)
           expect(res.body.mobileNumber).toEqual(user.mobileNumber)
-          expect(res.body).not.toHaveProperty('password', user.password)
+          expect(res.body).not.toHaveProperty('password')
           return done()
         })
         .catch(done)
@@ -73,7 +73,6 @@ describe('User API specs', () => {
 
   describe('PUT /api/users/:userId', () => {
     test('should update user details', async (done) => {
-      user = await User.findOne({ username: user.username })
       supertest(app)
         .put(`/api/users/${user._id}`)
         .set('Authorization', `Bearer ${token}`)
@@ -82,7 +81,23 @@ describe('User API specs', () => {
         .then((res) => {
           expect(res.body.username).toEqual(user.username)
           expect(res.body.mobileNumber).toEqual('0987654321')
-          expect(res.body).not.toHaveProperty('password', user.password)
+          expect(res.body).not.toHaveProperty('password')
+          return done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('DELETE /api/users/:userId', () => {
+    test('should delete user', async (done) => {
+      supertest(app)
+        .delete(`/api/users/${user._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(httpStatus.OK)
+        .then((res) => {
+          expect(res.body.username).toEqual(user.username)
+          expect(res.body.mobileNumber).toEqual('0987654321')
+          expect(res.body).not.toHaveProperty('password')
           return done()
         })
         .catch(done)
