@@ -1,15 +1,15 @@
 'use strict'
 
-const mongoose = require('mongoose')
 const supertest = require('supertest')
+const httpStatus = require('http-status')
 
 const app = require('../index')
+const User = require('../api/user/user.model')
 
 afterAll((done) => {
-  mongoose.model = {}
-  mongoose.modelSchemas = {}
-  mongoose.connection.close()
-  done()
+  User.remove({})
+    .then(() => done())
+    .catch(done)
 })
 
 describe('User API specs', () => {
@@ -20,15 +20,18 @@ describe('User API specs', () => {
   }
 
   describe('POST /api/users', () => {
-    test('should create new user', async (done) => {
-      try {
-        const response = await supertest(app).post('/api/users').send(user)
-        console.log('it was success!!!')
-        expect(response.statusCode).toBe(200)
-      } catch (e) {
-        console.log('it was not a success!!!')
-        done()
-      }
+    test('should create new user', (done) => {
+      supertest(app)
+        .post('/api/users')
+        .send(user)
+        .expect(httpStatus.OK)
+        .then((res) => {
+          console.log(res.body)
+          expect(res.body.username).toEqual(user.username)
+          expect(res.body.mobileNumber).toEqual(user.mobileNumber)
+          return done()
+        })
+        .catch(done)
     })
   })
 })
