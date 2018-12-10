@@ -1,9 +1,9 @@
 const Joi = require('joi')
-const env = require('dotenv').config()
+const dotenv = require('dotenv').config()
 
 // Error on unsuccessful loading of .env
-if (env.error) {
-  throw new Error(`Problem loading .env file: ${env.error.message}`)
+if (dotenv.error) {
+  throw new Error(`Problem loading .env file: ${dotenv.error.message}`)
 }
 
 // Validation schema for .env
@@ -32,9 +32,9 @@ const schema = Joi.object({
     .default('info'),
   JET_SECRET: Joi.string().required()
     .description('JWT Secret required to sign')
-}).unknown(false)
+}).unknown().required()
 
-const { error, value } = Joi.validate(env.parsed, schema)
+const { error, value } = Joi.validate(process.env, schema)
 
 if (error) {
   throw new Error(`.env validation error: ${error.message}`)

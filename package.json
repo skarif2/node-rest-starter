@@ -20,9 +20,7 @@
   },
   "scripts": {
     "start": "node ./src/index.js",
-    "docker": "sudo sh ./bin/dev.sh",
-    "docker-test": "sudo sh ./bin/test.sh",
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "keywords": [
     "node"
@@ -62,6 +60,7 @@
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "supertest": "^3.3.0"
   }
 }

@@ -44,7 +44,7 @@ app.use(methodOverride())
  */
 if (env.NODE_ENV === 'prod') {
   app.use(morgan('dev', { stream: logger.stream }))
-} else {
+} else if (env.NODE_ENV !== 'test') {
   app.use(morgan('dev'))
 }
 

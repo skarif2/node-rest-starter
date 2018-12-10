@@ -12,4 +12,5 @@ extends:
 rules:
   no-param-reassign: error
   no-empty: warn
+  node/no-unpublished-require: 0
   jest: true
