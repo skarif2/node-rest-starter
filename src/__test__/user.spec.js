@@ -48,7 +48,6 @@ describe('User API specs', () => {
         .expect(httpStatus.OK)
         .then((res) => {
           expect(Array.isArray(res.body)).toBeTruthy()
-          expect(res.body).toHaveLength(1)
           return done()
         })
         .catch(done)

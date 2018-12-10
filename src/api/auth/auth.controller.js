@@ -23,6 +23,7 @@ async function login (req, res, next) {
       return res.json({
         token,
         user: {
+          _id: user._id,
           username: user.username,
           mobileNumber: user.mobileNumber
         }

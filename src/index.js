@@ -9,11 +9,7 @@ const env = require('./config/environment')
 const app = require('./config/express')
 const mongoose = require('./config/mongoose')
 
-if (env.NODE_ENV === 'test') {
-  mongoose.connection.on('connected', () => {
-    app.listen(env.PORT)
-  })
-} else {
+if (env.NODE_ENV !== 'test') {
   const log = console.log
   mongoose.connection.on('connected', () => {
     log(chalk.green.bold('\nconnected to mongodb'))
