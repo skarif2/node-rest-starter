@@ -51,7 +51,7 @@ router.route('/:userId')
     userCtrl.get)
 
   /**
-   * @api {patch} /api/users/:userId Update user details
+   * @api {put} /api/users/:userId Update user details
    * @apiName Update User
    * @apiGroup User
    *
@@ -61,7 +61,7 @@ router.route('/:userId')
    * @apiSuccess {Object} users List of users
    * @apiError {Object} error Error response
    */
-  .patch(guard({ secret: env.JET_SECRET, requestProperty: 'auth' }),
+  .put(guard({ secret: env.JET_SECRET, requestProperty: 'auth' }),
     validate(userParam.update),
     userCtrl.update)
 

@@ -31,6 +31,23 @@ describe('User API specs', () => {
           expect(res.body.username).toEqual(user.username)
           expect(res.body.mobileNumber).toEqual(user.mobileNumber)
           expect(res.body).not.toHaveProperty('password', user.password)
+          user = res.body
+          return done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('GET /api/users', () => {
+    test('should get all user', async (done) => {
+      const skip = 0
+      const limit = 0
+      supertest(app)
+        .get(`/api/users?limit=${limit}&skip=${skip}`)
+        .expect(httpStatus.OK)
+        .then((res) => {
+          expect(Array.isArray(res.body)).toBeTruthy()
+          expect(res.body).toHaveLength(1)
           return done()
         })
         .catch(done)
@@ -43,11 +60,28 @@ describe('User API specs', () => {
       supertest(app)
         .get(`/api/users/${user._id}`)
         .set('Authorization', `Bearer ${token}`)
-        .send(user)
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body.username).toEqual(user.username)
           expect(res.body.mobileNumber).toEqual(user.mobileNumber)
+          expect(res.body).not.toHaveProperty('password', user.password)
+          return done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('PUT /api/users/:userId', () => {
+    test('should update user details', async (done) => {
+      user = await User.findOne({ username: user.username })
+      supertest(app)
+        .put(`/api/users/${user._id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({ mobileNumber: '0987654321' })
+        .expect(httpStatus.OK)
+        .then((res) => {
+          expect(res.body.username).toEqual(user.username)
+          expect(res.body.mobileNumber).toEqual('0987654321')
           expect(res.body).not.toHaveProperty('password', user.password)
           return done()
         })
