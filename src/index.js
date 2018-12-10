@@ -16,16 +16,15 @@ if (env.NODE_ENV === 'test') {
 } else {
   const log = console.log
   mongoose.connection.on('connected', () => {
-    log(chalk.yellow('\nConnected to MongoDB!'))
-    log(chalk.green(`\n[[ Server starting >_ ]]`))
+    log(chalk.green.bold('\nconnected to mongodb'))
     app.listen(env.PORT, () => {
-      log(chalk.red(`\n${chalk.bold(env.APP_NAME)} has started!`))
+      log(chalk.green(`\n${chalk.bold(env.APP_NAME)} has started!`))
       log('-----------------------------')
-      log(`Environment:\t${chalk.underline.bold(env.NODE_ENV)}`)
-      log(`Port:\t${env.PORT}`)
-      log(`Base Url:\thttp://localhost:${env.PORT}/api`)
-      log(`Mongo Uri:\t${env.MONGO_URI}${env.MONGO_DBNAME}`)
-      log(`DB Name:\t${env.MONGO_DBNAME}`)
+      log(`Environment:\t${chalk.bold(env.NODE_ENV)}`)
+      log(`Port:\t\t${chalk.bold(env.PORT)}`)
+      log(`Base Url:\t${chalk.bold(`http://localhost:${env.PORT}/api`)}`)
+      log(`Mongo Uri:\t${chalk.bold(`${env.MONGO_URI}${env.MONGO_DBNAME}`)}`)
+      log(`DB Name:\t${chalk.bold(env.MONGO_DBNAME)}`)
       log('')
     })
   })

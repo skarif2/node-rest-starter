@@ -1,10 +1,8 @@
-const chalk = require('chalk')
 const mongoose = require('mongoose')
 const util = require('util')
 const debug = require('debug')('node-rest-starter:index')
 
 const env = require('./environment')
-const console = require('./console')
 
 /**
  * make bluebird default Promise
@@ -32,10 +30,8 @@ const mongoOption = {
  * connect to mongo db
  */
 const mongoUri = env.MONGO_URI
-console(chalk.green(`[[ Connecting to Mongo ${mongoUri}${mongoOption.dbName} >_ ]]`))
 mongoose.connect(mongoUri, mongoOption)
-mongoose.connection.on('error', (err) => {
-  console(chalk.red('Mongo connection error'), err)
+mongoose.connection.on('error', () => {
   throw new Error(`Unable to connect to database: ${mongoUri}`)
 })
 
