@@ -23,7 +23,7 @@ describe('auth specs', () => {
   }
 
   describe('POST /api/auth/login', () => {
-    test('should return user with JWT', async (done) => {
+    test('should return unauthorized', async (done) => {
       const saveUser = new User({
         username: user.username,
         mobileNumber: user.mobileNumber,
@@ -32,10 +32,20 @@ describe('auth specs', () => {
       await saveUser.save()
       supertest(app)
         .post('/api/auth/login')
+        .send({ username: user.username, password: 'wrongpass' })
+        .expect(httpStatus.UNAUTHORIZED)
+        .then(done())
+        .catch(done)
+    })
+
+    test('should return user with JWT', async (done) => {
+      supertest(app)
+        .post('/api/auth/login')
         .send({ username: user.username, password: user.password })
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body).toHaveProperty('token')
+          expect(res.body.token.split('.')).toHaveLength(3)
           expect(res.body.user).toHaveProperty('_id')
           expect(res.body.user.username).toEqual(user.username)
           expect(res.body.user.mobileNumber).toEqual(user.mobileNumber)

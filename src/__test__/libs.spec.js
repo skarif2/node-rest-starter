@@ -7,7 +7,7 @@ const JWToken = require('../libs/JWToken')
 
 describe('libs specs', () => {
   describe('APIError specs', () => {
-    test('should be instance of APIError', async () => {
+    test('should be instance of APIError', () => {
       const err = new APIError('Instance of APIError',
         httpStatus.INTERNAL_SERVER_ERROR, false)
       expect(err).toBeInstanceOf(APIError)
@@ -16,7 +16,7 @@ describe('libs specs', () => {
       expect(err).toHaveProperty('isOperational', true)
     })
 
-    test('should not be instance of APIError', async () => {
+    test('should not be instance of APIError', () => {
       const err = new Error('Not a instance of APIError')
       expect(err).not.toBeInstanceOf(APIError)
       expect(err).not.toHaveProperty('status')
