@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
 const httpStatus = require('http-status')
 
-const JWToken = require('../../libs/JWToken')
+const JWToken = require('../../libs/jwToken')
 const APIError = require('../../libs/APIError')
 const User = require('../user/user.model')
 

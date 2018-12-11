@@ -5,7 +5,7 @@ const httpStatus = require('http-status')
 
 const app = require('../index')
 const User = require('../api/user/user.model')
-const JWToken = require('../libs/JWToken')
+const JWToken = require('../libs/jwToken')
 
 afterAll((done) => {
   User.deleteMany({})
