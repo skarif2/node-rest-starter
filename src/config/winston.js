@@ -10,9 +10,9 @@ let logger
 /**
  * Create logger instance for perticular env
  */
-if (env.NODE_ENV !== 'prod') {
+if (env.nodeEnv !== 'prod') {
   logger = createLogger({
-    level: env.LOG_LEVEL,
+    level: env.logLevel,
     transports: [
       new transports.Console()
     ],
@@ -25,7 +25,7 @@ if (env.NODE_ENV !== 'prod') {
   logger = createLogger({
     transports: [
       new transports.Console({
-        level: env.LOG_LEVEL,
+        level: env.logLevel,
         handleExceptions: true,
         json: true,
         colorize: true

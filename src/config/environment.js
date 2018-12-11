@@ -28,7 +28,7 @@ const schema = Joi.object({
   LOG_LEVEL: Joi.string().lowercase().trim()
     .allow(['error', 'warn', 'info', 'verbose', 'debug', 'silly'])
     .default('info'),
-  JET_SECRET: Joi.string().required()
+  JWT_SECRET: Joi.string().required()
     .description('JWT Secret required to sign')
 }).unknown().required()
 
@@ -38,4 +38,17 @@ if (error) {
   throw new Error(`.env validation error: ${error.message}`)
 }
 
-module.exports = value
+const env = {
+  appName: value.APP_NAME,
+  nodeEnv: value.NODE_ENV,
+  port: value.PORT,
+  mongo: {
+    host: value.MONGO_HOST,
+    port: value.MONGO_PORT,
+    debug: value.MONGO_DEBUG
+  },
+  logLevel: value.LOG_LEVEL,
+  jwtSecret: value.JWT_SECRET
+}
+
+module.exports = env

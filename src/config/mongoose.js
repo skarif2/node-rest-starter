@@ -28,7 +28,7 @@ const mongoOption = {
 /**
  * connect to mongo db
  */
-const mongoUri = env.MONGO_HOST
+const mongoUri = env.mongo.host
 mongoose.connect(mongoUri, mongoOption)
 mongoose.connection.on('error', () => {
   throw new Error(`Unable to connect to database: ${mongoUri}`)
@@ -37,7 +37,7 @@ mongoose.connection.on('error', () => {
 /**
  * print mongoose logs in dev env
  */
-if (env.MONGO_DEBUG) {
+if (env.mongo.debug) {
   mongoose.set('debug', (collectionName, method, query, doc) => {
     debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc)
   })

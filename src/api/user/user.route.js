@@ -46,7 +46,7 @@ router.route('/:userId')
    * @apiSuccess {Object} user Details of user
    * @apiError {Object} error Error response
    */
-  .get(guard({ secret: env.JET_SECRET, requestProperty: 'auth' }),
+  .get(guard({ secret: env.jwtSecret, requestProperty: 'auth' }),
     validate(userParam.get),
     userCtrl.get)
 
@@ -61,7 +61,7 @@ router.route('/:userId')
    * @apiSuccess {Object} users List of users
    * @apiError {Object} error Error response
    */
-  .put(guard({ secret: env.JET_SECRET, requestProperty: 'auth' }),
+  .put(guard({ secret: env.jwtSecret, requestProperty: 'auth' }),
     validate(userParam.update),
     userCtrl.update)
 
@@ -75,7 +75,7 @@ router.route('/:userId')
    * @apiSuccess {Object} user Deleted user details
    * @apiError {Object} error Error response
    */
-  .delete(guard({ secret: env.JET_SECRET, requestProperty: 'auth' }),
+  .delete(guard({ secret: env.jwtSecret, requestProperty: 'auth' }),
     validate(userParam.remove),
     userCtrl.remove)
 

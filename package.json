@@ -19,7 +19,7 @@
     "npm": ">=6.4.1"
   },
   "scripts": {
-    "start": "npm i && node ./src/index.js",
+    "start": "node ./src/index.js",
     "test": "NODE_ENV=test jest"
   },
   "keywords": [

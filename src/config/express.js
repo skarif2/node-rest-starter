@@ -9,7 +9,6 @@ const methodOverride = require('method-override')
 const validation = require('express-validation')
 const expressWinston = require('express-winston')
 const httpStatus = require('http-status')
-const chokidar = require('chokidar')
 
 const env = require('./environment')
 const logger = require('./winston')
@@ -21,7 +20,7 @@ const app = express()
 /**
  * Set application port to listen to
  */
-app.set('port', env.PORT)
+app.set('port', env.port)
 
 /**
  * Middleware to compress respose bodies
@@ -43,9 +42,9 @@ app.use(methodOverride())
 /**
  * Set morgan environment for logging
  */
-if (env.NODE_ENV === 'prod') {
+if (env.nodeEnv === 'prod') {
   app.use(morgan('dev', { stream: logger.stream }))
-} else if (env.NODE_ENV !== 'test') {
+} else if (env.nodeEnv !== 'test') {
   app.use(morgan('dev'))
 }
 
@@ -67,7 +66,7 @@ app.use(helmet.hidePoweredBy())
 /**
  * Enable detailed API logging in all env except test
  */
-if (env.NODE_ENV !== 'test') {
+if (env.nodeEnv !== 'test') {
   expressWinston.requestWhitelist.push('body')
   expressWinston.responseWhitelist.push('body')
   app.use(expressWinston.logger({
@@ -83,22 +82,6 @@ if (env.NODE_ENV !== 'test') {
  * Mounts api routes at /api
  */
 app.use('/api', routes)
-
-// Do "hot-reloading" of express stuff on the server
-// Throw away cached modules and re-require next time
-// Ensure there's no important state in there!
-const watcher = chokidar.watch('../src')
-
-watcher.on('ready', () => {
-  watcher.on('all', () => {
-    console.log('Clearing /src/ module cache from server')
-    Object.keys(require.cache).forEach((id) => {
-      if (/[\/\\]server[\/\\]/.test(id)) { // eslint-disable-line no-useless-escape
-        delete require.cache[id]
-      }
-    })
-  })
-})
 
 /**
  * Catch 404 and forward to error handler
