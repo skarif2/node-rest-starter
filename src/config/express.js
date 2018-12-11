@@ -9,6 +9,7 @@ const methodOverride = require('method-override')
 const validation = require('express-validation')
 const expressWinston = require('express-winston')
 const httpStatus = require('http-status')
+const chokidar = require('chokidar')
 
 const env = require('./environment')
 const logger = require('./winston')
@@ -82,6 +83,22 @@ if (env.NODE_ENV !== 'test') {
  * Mounts api routes at /api
  */
 app.use('/api', routes)
+
+// Do "hot-reloading" of express stuff on the server
+// Throw away cached modules and re-require next time
+// Ensure there's no important state in there!
+const watcher = chokidar.watch('../src')
+
+watcher.on('ready', () => {
+  watcher.on('all', () => {
+    console.log('Clearing /src/ module cache from server')
+    Object.keys(require.cache).forEach((id) => {
+      if (/[\/\\]server[\/\\]/.test(id)) { // eslint-disable-line no-useless-escape
+        delete require.cache[id]
+      }
+    })
+  })
+})
 
 /**
  * Catch 404 and forward to error handler

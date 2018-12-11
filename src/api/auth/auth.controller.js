@@ -12,7 +12,6 @@ const User = require('../user/user.model')
  * @returns {<{token, user}, Error>}
  */
 async function login (req, res, next) {
-  console.log(req.body)
   try {
     const user = await User.getOne({ username: req.body.username })
     if (bcrypt.compareSync(req.body.password, user.password)) {

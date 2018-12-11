@@ -19,7 +19,7 @@
     "npm": ">=6.4.1"
   },
   "scripts": {
-    "start": "node ./src/index.js",
+    "start": "npm i && node ./src/index.js",
     "test": "NODE_ENV=test jest"
   },
   "keywords": [
@@ -30,6 +30,7 @@
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
+    "chokidar": "^2.0.4",
     "compression": "^1.7.3",
     "cors": "^2.8.5",
     "debug": "^4.1.0",
