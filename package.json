@@ -19,8 +19,8 @@
     "npm": ">=6.4.1"
   },
   "scripts": {
-    "start": "node ./src/index.js",
-    "test": "NODE_ENV=test jest"
+    "start": "npm i && node ./src/index.js",
+    "test": "NODE_ENV=test MONGO_HOST=mongodb://localhost/node-rest-starter-test jest"
   },
   "keywords": [
     "node"
