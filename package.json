@@ -20,7 +20,8 @@
   },
   "scripts": {
     "start": "npm i && node ./src/index.js",
-    "test": "NODE_ENV=test MONGO_HOST=mongodb://localhost/node-rest-starter-test jest"
+    "test": "NODE_ENV=test MONGO_HOST=mongodb://localhost/node-rest-starter-test jest",
+    "coverage": "NODE_ENV=test MONGO_HOST=mongodb://localhost/node-rest-starter-test jest --coverage"
   },
   "keywords": [
     "node"
