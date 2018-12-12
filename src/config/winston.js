@@ -45,6 +45,9 @@ if (env.nodeEnv !== 'prod') {
       })
     ]
   })
+  /**
+   * writes streams to file
+   */
   logger.stream = {
     write: message => logger.info(message.trim())
   }

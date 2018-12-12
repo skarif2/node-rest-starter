@@ -2,6 +2,9 @@ const PrettyError = require('pretty-error')
 
 const instance = new PrettyError()
 
+/**
+ * Styling console error logs
+ */
 instance.appendStyle({
   'pretty-error > header > title > kind': {
     display: 'none'

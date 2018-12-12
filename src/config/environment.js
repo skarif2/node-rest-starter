@@ -1,12 +1,16 @@
 const Joi = require('joi')
 const dotenv = require('dotenv').config()
 
-// Error on unsuccessful loading of .env
+/**
+ * Error on unsuccessful loading of .env
+ */
 if (dotenv.error) {
   throw new Error(`Problem loading .env file: ${dotenv.error.message}`)
 }
 
-// Validation schema for .env
+/**
+ * Validation schema for .env
+ */
 const schema = Joi.object({
   APP_NAME: Joi.string()
     .default('node-rest-starter'),
@@ -38,6 +42,9 @@ if (error) {
   throw new Error(`.env validation error: ${error.message}`)
 }
 
+/**
+ * Const to contain validated env vers
+ */
 const env = {
   appName: value.APP_NAME,
   nodeEnv: value.NODE_ENV,
