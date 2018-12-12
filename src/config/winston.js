@@ -45,10 +45,11 @@ if (env.nodeEnv !== 'prod') {
       })
     ]
   })
+  logger.stream = {
   /**
    * writes streams to file
+  * @param {String} message stream to write
    */
-  logger.stream = {
     write: message => logger.info(message.trim())
   }
 }
