@@ -15,4 +15,4 @@ git:
 
 script:
   - cp .env.example .env
-  - jest --detectOpenHandles
+  - jest --forceExit --coverage --coverageReporters=text-lcov | coveralls && rm -rf ./coverage
