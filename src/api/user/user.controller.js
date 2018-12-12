@@ -1,7 +1,9 @@
 const _ = require('lodash')
 const bcrypt = require('bcryptjs')
+const httpStatus = require('http-status')
 
 const User = require('./user.model')
+const APIError = require('../../libs/APIError')
 
 const salt = bcrypt.genSaltSync(10)
 /**
@@ -9,7 +11,7 @@ const salt = bcrypt.genSaltSync(10)
  */
 async function load (req, res, next, id) {
   try {
-    req.user = await User.get(id)
+    req.user = await User.get({ '_id': id })
     return next()
   } catch (e) {
     next(e)
@@ -45,7 +47,11 @@ async function create (req, res, next) {
     const sendUser = _.pick(savedUser, ['_id', 'username', 'mobileNumber'])
     return res.json(sendUser)
   } catch (e) {
-    next(e)
+    // if (e.code && e.code === 11000) {
+    //   const err = new APIError(e.errmsg, httpStatus.BAD_REQUEST, false)
+    //   return next(err)
+    // }
+    return next(e)
   }
 }
 

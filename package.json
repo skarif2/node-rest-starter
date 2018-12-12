@@ -19,7 +19,7 @@
     "npm": ">=6.4.1"
   },
   "scripts": {
-    "start": "npm i && node ./src/index.js",
+    "start": "nodemon ./src/index.js",
     "test": "NODE_ENV=test MONGO_HOST=mongodb://localhost/node-rest-starter-test jest",
     "coverage": "NODE_ENV=test MONGO_HOST=mongodb://localhost/node-rest-starter-test jest --coverage"
   },
@@ -63,6 +63,7 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^23.6.0",
+    "nodemon": "^1.18.8",
     "supertest": "^3.3.0"
   }
 }

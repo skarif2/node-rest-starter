@@ -40,29 +40,15 @@ UserSchema.method({
 UserSchema.statics = {
   /**
    * Get User
-   * @param {ObjectId} id - _id of user
+   * @param {Object} conditions - conditions to find user for
    * @returns {Promise<User, Error>}
    */
-  async get (id) {
-    const user = await this.findById(id).exec()
+  async get (conditions) {
+    const user = await this.findOne(conditions).exec()
     if (user) {
       return user
     }
     const err = new APIError('No such user exists!', httpStatus.NOT_FOUND)
-    return Promise.reject(err)
-  },
-
-  /**
-   * Get User
-   * @param {Object} params - params to find user with
-   * @returns {Promise<User, Error>}
-   */
-  async getOne (params) {
-    const user = await this.findOne(params).exec()
-    if (user) {
-      return user
-    }
-    const err = new APIError('No such user exists!', httpStatus.BAD_REQUEST)
     return Promise.reject(err)
   },
 

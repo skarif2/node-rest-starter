@@ -37,6 +37,14 @@ describe('User API specs', () => {
         })
         .catch(done)
     })
+    test('should return - duplicate key error', (done) => {
+      supertest(app)
+        .post('/api/users')
+        .send(user)
+        .expect(httpStatus.BAD_REQUEST)
+        .then(() => done())
+        .catch(done)
+    })
   })
 
   describe('GET /api/users', () => {
@@ -55,6 +63,14 @@ describe('User API specs', () => {
   })
 
   describe('GET /api/users/:userId', () => {
+    test('should return - no such user exists', async (done) => {
+      supertest(app)
+        .get(`/api/users/507f191e810c19729de860ea`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(httpStatus.NOT_FOUND)
+        .then(() => done())
+        .catch(done)
+    })
     test('should get user details', async (done) => {
       supertest(app)
         .get(`/api/users/${user._id}`)

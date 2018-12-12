@@ -13,7 +13,7 @@ const User = require('../user/user.model')
  */
 async function login (req, res, next) {
   try {
-    const user = await User.getOne({ username: req.body.username })
+    const user = await User.get({ username: req.body.username })
     if (bcrypt.compareSync(req.body.password, user.password)) {
       const payload = {
         username: user.username,
