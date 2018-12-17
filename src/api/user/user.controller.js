@@ -47,10 +47,10 @@ async function create (req, res, next) {
     const sendUser = _.pick(savedUser, ['_id', 'username', 'mobileNumber'])
     return res.json(sendUser)
   } catch (e) {
-    // if (e.code && e.code === 11000) {
-    //   const err = new APIError(e.errmsg, httpStatus.BAD_REQUEST, false)
-    //   return next(err)
-    // }
+    if (e.code && e.code === 11000) {
+      const err = new APIError(e.errmsg, httpStatus.BAD_REQUEST, false)
+      return next(err)
+    }
     return next(e)
   }
 }

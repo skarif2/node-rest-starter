@@ -9,9 +9,10 @@ const methodOverride = require('method-override')
 const validation = require('express-validation')
 const expressWinston = require('express-winston')
 const httpStatus = require('http-status')
+const consola = require('consola')
 
 const env = require('./environment')
-const logger = require('./winston')
+const WinstonReporter = require('./winston')
 const routes = require('../index.route')
 const APIError = require('../libs/APIError')
 
@@ -43,10 +44,20 @@ app.use(methodOverride())
  * Set morgan environment for logging
  */
 if (env.nodeEnv === 'prod') {
-  app.use(morgan('dev', { stream: logger.stream }))
+  // app.use(morgan('dev', { stream: logger.stream }))
 } else if (env.nodeEnv !== 'test') {
   app.use(morgan('dev'))
 }
+
+// const logger = consola.create({
+//   // level: 4,
+//   reporters: [
+//     new consola.WinstonReporter
+//   ],
+//   defaults: {
+//     additionalColor: 'white'
+//   }
+// })
 
 /**
  * Enables cross-origin resource sharing
@@ -69,8 +80,9 @@ app.use(helmet.hidePoweredBy())
 if (env.nodeEnv !== 'test') {
   expressWinston.requestWhitelist.push('body')
   expressWinston.responseWhitelist.push('body')
+
   app.use(expressWinston.logger({
-    winstonInstance: logger,
+    winstonInstance: new WinstonReporter(),
     meta: true, // optional: log meta data about request (defaults to true)
     msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
     colorStatus: true, // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
