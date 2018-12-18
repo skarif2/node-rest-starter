@@ -2,15 +2,6 @@
  * Wrap all console logs with consola
  */
 const consola = require('consola')
-const logger = consola.create({
-  // level: 4,
-  reporters: [
-    new consola.JSONReporter()
-  ],
-  defaults: {
-    additionalColor: 'white'
-  }
-})
 /**
  * Prettify every error log
  */
@@ -26,20 +17,20 @@ const mongoose = require('./config/mongoose')
  */
 if (env.nodeEnv !== 'test') {
   mongoose.connection.on('connected', () => {
-    logger.ready({
+    consola.ready({
       message: 'MongoDB',
       badge: true
     })
     app.listen(env.port, () => {
-      logger.ready({
+      consola.ready({
         message: `${env.appName} Server`,
         badge: true
       })
-      logger.log('-------------------------------------------------')
-      logger.info(`Environment: ${env.nodeEnv}`)
-      logger.info(`Port: ${env.port}`)
-      logger.info(`Base uri: http://localhost:${env.port}/api`)
-      logger.info(`Mongo uri: ${env.mongo.host}`)
+      consola.log('-------------------------------------------------')
+      consola.info(`Environment: ${env.nodeEnv}`)
+      consola.info(`Port: ${env.port}`)
+      consola.info(`Base uri: http://localhost:${env.port}/api`)
+      consola.info(`Mongo uri: ${env.mongo.host}`)
     })
   })
 }
