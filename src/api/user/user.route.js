@@ -10,9 +10,10 @@ const router = Router()
 
 router.route('/')
   /**
-   * @api {get} /api/users Get list of users
+   * @api {get} /api/users List Users
    * @apiName List Users
    * @apiGroup User
+   * @apiVersion 1.0.0
    *
    * @apiParam none
    *
@@ -22,9 +23,10 @@ router.route('/')
   .get(validate(userParam.list), userCtrl.list)
 
   /**
-   * @api {post} /api/users Create new user
+   * @api {post} /api/users Create User
    * @apiName Create User
    * @apiGroup User
+   * @apiVersion 1.0.0
    *
    * @apiParam (body) {String} username Username of user
    * @apiParam (body) {String} mobileNumber Mobile number of user
@@ -37,9 +39,10 @@ router.route('/')
 
 router.route('/:userId')
   /**
-   * @api {get} /api/users/:userId Get user details
+   * @api {get} /api/users/:userId Get User
    * @apiName Get User
    * @apiGroup User
+   * @apiVersion 1.0.0
    *
    * @apiParam (param) {String} userId _id of user
    *
@@ -51,9 +54,10 @@ router.route('/:userId')
     userCtrl.get)
 
   /**
-   * @api {put} /api/users/:userId Update user details
+   * @api {put} /api/users/:userId Update User
    * @apiName Update User
    * @apiGroup User
+   * @apiVersion 1.0.0
    *
    * @apiParam (param) {String} userId _id of user
    * @apiParam (body) {String} mobileNumber Mobile number of user
@@ -66,9 +70,10 @@ router.route('/:userId')
     userCtrl.update)
 
   /**
-   * @api {delete} /api/users/:userId Delete user
+   * @api {delete} /api/users/:userId Delete User
    * @apiName Delete User
    * @apiGroup User
+   * @apiVersion 1.0.0
    *
    * @apiParam (param) {String} userId _id of user
    *

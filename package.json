@@ -1,7 +1,7 @@
 {
   "name": "node-rest-starter",
-  "version": "0.1.0-alpha-01",
-  "description": ":fire: A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. :tada: :tada:",
+  "version": "0.2.0-alpha-01",
+  "description": "A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB.",
   "homepage": "https://skarif2.github.io/node-rest-starter",
   "author": "Sk Arif <skarif2@gmail.com>",
   "contributors": [],
@@ -65,5 +65,9 @@
     "jest": "^23.6.0",
     "nodemon": "^1.18.8",
     "supertest": "^3.3.0"
+  },
+  "apidoc": {
+    "title": "Node REST Starter",
+    "url": "https://localhost"
   }
 }

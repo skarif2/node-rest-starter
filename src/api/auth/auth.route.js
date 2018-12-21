@@ -7,9 +7,10 @@ const router = Router()
 
 router.route('/login')
   /**
-   * @api {post} /api/auth/login Returns token if correct credentials are provided
+   * @api {post} /api/auth/login User Login
    * @apiName User Login
    * @apiGroup Auth
+   * @apiVersion 1.0.0
    *
    * @apiParam (body) {String} username Username of user
    * @apiParam (body) {String} password Password of user
