@@ -115,7 +115,9 @@ app.use((err, req, res, next) => {
     message: err.isPublic ? err.message : httpStatus[err.status],
     stack: env.nodeEnv === 'dev' ? err.stack : {}
   })
-  console.error(err)
+  if (env.nodeEnv === 'dev') {
+    console.error(err)
+  }
 })
 
 module.exports = app
