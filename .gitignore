@@ -16,9 +16,6 @@ node_modules
 # coverage directory
 coverage
 
-# apiDoc directory
-apidoc
-
 # log folders
 __logs__
 

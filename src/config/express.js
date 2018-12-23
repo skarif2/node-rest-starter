@@ -9,10 +9,9 @@ const methodOverride = require('method-override')
 const validation = require('express-validation')
 const expressWinston = require('express-winston')
 const httpStatus = require('http-status')
-const consola = require('consola')
 
 const env = require('./environment')
-const WinstonReporter = require('./winston')
+const logger = require('./winston')
 const routes = require('../index.route')
 const APIError = require('../libs/APIError')
 
@@ -44,20 +43,10 @@ app.use(methodOverride())
  * Set morgan environment for logging
  */
 if (env.nodeEnv === 'prod') {
-  // app.use(morgan('dev', { stream: logger.stream }))
+  app.use(morgan('dev', { stream: logger.stream }))
 } else if (env.nodeEnv !== 'test') {
   app.use(morgan('dev'))
 }
-
-// const logger = consola.create({
-//   // level: 4,
-//   reporters: [
-//     new consola.WinstonReporter
-//   ],
-//   defaults: {
-//     additionalColor: 'white'
-//   }
-// })
 
 /**
  * Enables cross-origin resource sharing
@@ -80,9 +69,8 @@ app.use(helmet.hidePoweredBy())
 if (env.nodeEnv !== 'test') {
   expressWinston.requestWhitelist.push('body')
   expressWinston.responseWhitelist.push('body')
-
   app.use(expressWinston.logger({
-    winstonInstance: new WinstonReporter(),
+    winstonInstance: logger,
     meta: true, // optional: log meta data about request (defaults to true)
     msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
     colorStatus: true, // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
@@ -94,14 +82,6 @@ if (env.nodeEnv !== 'test') {
  * Mounts api routes at /api
  */
 app.use('/api', routes)
-
-/**
- * Catch 404 and forward to error handler
- */
-app.use((req, res, next) => {
-  const err = new APIError('API not found!', httpStatus.NOT_FOUND)
-  return next(err)
-})
 
 /**
  * If error is not an instanceOf APIError, convert it.
@@ -117,6 +97,25 @@ app.use((err, req, res, next) => {
     return next(apiError)
   }
   return next(err)
+})
+
+/**
+ * Catch 404 and forward to error handler
+ */
+app.use((req, res, next) => {
+  const err = new APIError('API not found!', httpStatus.NOT_FOUND)
+  return next(err)
+})
+
+/**
+ * error handler, send stacktrace only during development
+ */
+app.use((err, req, res, next) => {
+  res.status(err.status).json({
+    message: err.isPublic ? err.message : httpStatus[err.status],
+    stack: env.nodeEnv === 'dev' ? err.stack : {}
+  })
+  console.error(err)
 })
 
 module.exports = app

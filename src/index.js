@@ -2,11 +2,7 @@
  * Wrap all console logs with consola
  */
 const consola = require('consola')
-/**
- * Prettify every error log
- */
-const prettyError = require('./config/prettyerror')
-prettyError.start()
+consola.wrapAll()
 
 const env = require('./config/environment')
 const app = require('./config/express')
