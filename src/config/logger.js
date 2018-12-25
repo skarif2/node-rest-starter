@@ -61,19 +61,13 @@ const getMethodColor = (method) => {
 }
 
 const getRequestColor = (status, httpVersion) => status < 300
-  ? chalk.black.bgGreen(` HTTP-${httpVersion} `)
-  : status >= 300 && status < 400
-    ? chalk.black.bgBlue(` HTTP-${httpVersion} `)
-    : status >= 400 && status < 500
-      ? chalk.black.bgYellow(` HTTP-${httpVersion} `)
-      : chalk.black.bgRed(` HTTP-${httpVersion} `)
+  ? chalk.black.bgGreen(` HTTP-${httpVersion} `) : status >= 300 && status < 400
+    ? chalk.black.bgBlue(` HTTP-${httpVersion} `) : status >= 400 && status < 500
+      ? chalk.black.bgYellow(` HTTP-${httpVersion} `) : chalk.black.bgRed(` HTTP-${httpVersion} `)
 
 const getStatusColor = (status) => status < 300
-  ? chalk.green(status)
-  : status >= 300 && status < 400
-    ? chalk.blue(status)
-    : status >= 400 && status < 500
-      ? chalk.blue(status)
-      : chalk.red(status)
+  ? chalk.green(status) : status >= 300 && status < 400
+    ? chalk.blue(status) : status >= 400 && status < 500
+      ? chalk.blue(status) : chalk.red(status)
 
 module.exports = logger
