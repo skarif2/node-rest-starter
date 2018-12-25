@@ -10,78 +10,64 @@ module.exports = (app) => {
     this.resBody = body
   }
   app.use(function (req, res, next) {
-    var start = process.hrtime()
+    const start = process.hrtime()
     onFinished(res, (err, res) => {
-      var diff = process.hrtime(start)
-      var responseTime = (diff[0] * 1e3 + diff[1] * 1e-6).toFixed(2)
+      const diff = process.hrtime(start)
+      const resTime = (diff[0] * 1e3 + diff[1] * 1e-6).toFixed(2)
       if (!err) {
-        const requestObj = _.pick(req, ['headers', 'params', 'query', 'body'])
-        const responseObj = { statusCode: res.statusCode }
-
+        const reqObj = _.pick(req, ['headers', 'params', 'query', 'body'])
+        const resObj = { statusCode: res.statusCode }
         try {
-          responseObj.body = JSON.parse(res.resBody)
+          resObj.body = JSON.parse(res.resBody)
         } catch (e) {
-          responseObj.body = res.resBody
+          resObj.body = res.resBody
         }
-
         consola.log('\n')
-        consola.info('req:', requestObj)
-        consola.info('res:', responseObj)
-
-        // Express style logging
-        // consola.info(`req: ${util.inspect(requestObj, false, null, true)}`)
-        // consola.info(`res: ${util.inspect(responseObj, false, null, true)}`)
-
+        consola.info('req:', reqObj)
+        consola.info('res:', resObj)
         if (res.statusCode >= 400 && res.statusCode < 500) {
-          consola.warn(responseObj.body)
+          consola.warn(resObj.body)
         } else if (res.statusCode >= 500) {
-          consola.error(responseObj.body)
+          consola.error(resObj.body)
         }
-
         consola.log(`${getRequestColor(res.statusCode, req.httpVersion)} ${
-          getMethodColor(req.method)} ${chalk.white(req.originalUrl)} - ${
-          getStatusColor(res.statusCode)} - ${responseTime} ms`)
+          getMethodColor(req.method)} ${req.originalUrl} - ${
+          getStatusColor(res.statusCode)} - ${resTime} ms`)
       }
     })
     next()
   })
 
-  const getRequestColor = (status, httpVersion) => {
-    if (status < 300) {
-      return chalk.black.bgHex('#28cb91')(` HTTP-${httpVersion} `)
-    } else if (status >= 300 && status < 400) {
-      return chalk.black.bgHex('#52aefa')(` HTTP-${httpVersion} `)
-    } else if (status >= 400 && status < 500) {
-      return chalk.black.bgHex('#ff9f44')(` HTTP-${httpVersion} `)
-    }
-    return chalk.black.bgHex('#ff4047')(` HTTP-${httpVersion} `)
-  }
-
   const getMethodColor = (method) => {
     switch (method) {
       case 'GET':
-        return chalk.hex('#52aefa').bold('GET')
+        return chalk.green.bold('GET')
       case 'POST':
-        return chalk.hex('#28cb91').bold('POST')
+        return chalk.yellow.bold('POST')
       case 'PUT':
-        return chalk.hex('#ff9f44').bold('PUT')
+        return chalk.blue.bold('PUT')
       case 'PATCH':
-        return chalk.hex('#ff9f44').bold('PATCH')
+        return chalk.blue.bold('PATCH')
       case 'DELETE':
-        return chalk.hex('#ff4047').bold('DELETE')
+        return chalk.red.bold('DELETE')
       default:
-        return chalk.hex('#52aefa').bold(method)
+        return chalk.cyan.bold(method)
     }
   }
 
-  const getStatusColor = (status) => {
-    if (status < 300) {
-      return chalk.hex('#28cb91')(status)
-    } else if (status >= 300 && status < 400) {
-      return chalk.hex('#52aefa')(status)
-    } else if (status >= 400 && status < 500) {
-      return chalk.hex('#ff9f44')(status)
-    }
-    return chalk.hex('#ff4047')(status)
-  }
+  const getRequestColor = (status, httpVersion) => status < 300
+    ? chalk.black.bgGreen(` HTTP-${httpVersion} `)
+    : status >= 300 && status < 400
+      ? chalk.black.bgBlue(` HTTP-${httpVersion} `)
+      : status >= 400 && status < 500
+        ? chalk.black.bgYellow(` HTTP-${httpVersion} `)
+        : chalk.black.bgRed(` HTTP-${httpVersion} `)
+
+  const getStatusColor = (status) => status < 300
+    ? chalk.green(status)
+    : status >= 300 && status < 400
+      ? chalk.blue(status)
+      : status >= 400 && status < 500
+        ? chalk.blue(status)
+        : chalk.red(status)
 }
