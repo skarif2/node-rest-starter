@@ -4,14 +4,12 @@ const cors = require('cors')
 const express = require('express')
 const helmet = require('helmet')
 const crossdomain = require('helmet-crossdomain')
-const morgan = require('morgan')
 const methodOverride = require('method-override')
 const validation = require('express-validation')
-const expressWinston = require('express-winston')
 const httpStatus = require('http-status')
 
 const env = require('./environment')
-const logger = require('./winston')
+const logger = require('./logger')
 const routes = require('../index.route')
 const APIError = require('../libs/APIError')
 
@@ -34,19 +32,17 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 /**
+ * Setup logging when env.nodeEnv is dev
+ */
+if (env.nodeEnv === 'dev') {
+  logger(app)
+}
+
+/**
  * Enables HTTP verbs such as PUT or DELETE in places
  * where the client doesn't support it
  */
 app.use(methodOverride())
-
-/**
- * Set morgan environment for logging
- */
-if (env.nodeEnv === 'prod') {
-  app.use(morgan('dev', { stream: logger.stream }))
-} else if (env.nodeEnv !== 'test') {
-  app.use(morgan('dev'))
-}
 
 /**
  * Enables cross-origin resource sharing
@@ -62,21 +58,6 @@ app.use(helmet.noSniff())
 app.use(helmet.frameguard())
 app.use(helmet.ieNoOpen())
 app.use(helmet.hidePoweredBy())
-
-/**
- * Enable detailed API logging in all env except test
- */
-if (env.nodeEnv !== 'test') {
-  expressWinston.requestWhitelist.push('body')
-  expressWinston.responseWhitelist.push('body')
-  app.use(expressWinston.logger({
-    winstonInstance: logger,
-    meta: true, // optional: log meta data about request (defaults to true)
-    msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
-    colorStatus: true, // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
-    colorize: true
-  }))
-}
 
 /**
  * Mounts api routes at /api
@@ -115,9 +96,6 @@ app.use((err, req, res, next) => {
     message: err.isPublic ? err.message : httpStatus[err.status],
     stack: env.nodeEnv === 'dev' ? err.stack : {}
   })
-  if (env.nodeEnv === 'dev') {
-    console.error(err)
-  }
 })
 
 module.exports = app
