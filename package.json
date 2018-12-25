@@ -22,7 +22,7 @@
     "start": "nodemon ./src/index.js",
     "test": "NODE_ENV=test MONGO_HOST=mongodb://localhost/node-rest-starter-test jest",
     "coverage": "NODE_ENV=test MONGO_HOST=mongodb://localhost/node-rest-starter-test jest --coverage",
-    "apidoc": "apidoc -i ./src -f .route.js -o ./docs"
+    "apidoc": "apidoc -i ./src -f .route.js -o ./apidoc"
   },
   "keywords": [
     "node"
