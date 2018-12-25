@@ -73,9 +73,17 @@ const getRequestColor = (status, httpVersion) => {
   return chalk.black.bgRed(` HTTP-${httpVersion} `)
 }
 
-const getStatusColor = (status) => status < 300
-  ? chalk.green(status) : status >= 300 && status < 400
-    ? chalk.blue(status) : status >= 400 && status < 500
-      ? chalk.blue(status) : chalk.red(status)
+const getStatusColor = (status) => {
+  if (status < 300) {
+    return chalk.green(status)
+  }
+  if (status >= 300 && status < 400) {
+    chalk.blue(status)
+  }
+  if (status >= 400 && status < 500) {
+    chalk.blue(status)
+  }
+  return chalk.red(status)
+}
 
 module.exports = logger
