@@ -65,10 +65,10 @@ const getRequestColor = (status, httpVersion) => {
     return chalk.black.bgGreen(` HTTP-${httpVersion} `)
   }
   if (status >= 300 && status < 400) {
-    chalk.black.bgBlue(` HTTP-${httpVersion} `)
+    return chalk.black.bgBlue(` HTTP-${httpVersion} `)
   }
   if (status >= 400 && status < 500) {
-    chalk.black.bgYellow(` HTTP-${httpVersion} `)
+    return chalk.black.bgYellow(` HTTP-${httpVersion} `)
   }
   return chalk.black.bgRed(` HTTP-${httpVersion} `)
 }
@@ -78,10 +78,10 @@ const getStatusColor = (status) => {
     return chalk.green(status)
   }
   if (status >= 300 && status < 400) {
-    chalk.blue(status)
+    return chalk.blue(status)
   }
   if (status >= 400 && status < 500) {
-    chalk.blue(status)
+    return chalk.yellow(status)
   }
   return chalk.red(status)
 }

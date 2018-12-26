@@ -21,7 +21,7 @@
   "scripts": {
     "start": "nodemon ./src/index.js",
     "test": "NODE_ENV=test MONGO_HOST=mongodb://localhost/node-rest-starter-test jest",
-    "coverage": "NODE_ENV=test MONGO_HOST=mongodb://localhost/node-rest-starter-test jest --coverage",
+    "coverage": "NODE_ENV=test MONGO_HOST=mongodb://localhost/node-rest-starter-test jest --no-cache --coverage",
     "apidoc": "apidoc -i ./src -f .route.js -o ./apidoc"
   },
   "keywords": [
@@ -61,6 +61,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^23.6.0",
     "nodemon": "^1.18.8",
+    "rewire": "^4.0.1",
     "supertest": "^3.3.0"
   },
   "apidoc": {
