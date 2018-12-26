@@ -14,23 +14,24 @@ afterAll((done) => {
 })
 
 describe('User API specs', () => {
-  let user = {
+  let user
+  const userData = {
     username: 'user123',
     mobileNumber: '1234567890',
     password: 'pass123'
   }
-  const token = JWToken.create(user, '10m')
+  const token = JWToken.create(userData, '10m')
 
   describe('POST /api/users', () => {
     test('should create new user', (done) => {
       supertest(app)
         .post('/api/users')
-        .send(user)
+        .send(userData)
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body).toHaveProperty('_id')
-          expect(res.body.username).toEqual(user.username)
-          expect(res.body.mobileNumber).toEqual(user.mobileNumber)
+          expect(res.body.username).toEqual(userData.username)
+          expect(res.body.mobileNumber).toEqual(userData.mobileNumber)
           expect(res.body).not.toHaveProperty('password')
           user = res.body
           return done()
@@ -40,7 +41,7 @@ describe('User API specs', () => {
     test('should return - duplicate key error', (done) => {
       supertest(app)
         .post('/api/users')
-        .send(user)
+        .send(userData)
         .expect(httpStatus.BAD_REQUEST)
         .then(() => done())
         .catch(done)

@@ -86,4 +86,10 @@ const getStatusColor = (status) => {
   return chalk.red(status)
 }
 
-module.exports = logger
+module.exports = {
+  logger,
+  log,
+  getMethodColor,
+  getRequestColor,
+  getStatusColor
+}

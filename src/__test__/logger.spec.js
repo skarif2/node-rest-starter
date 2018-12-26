@@ -1,12 +1,17 @@
 'use strict'
 
-const rewire = require('rewire')
 const chalk = require('chalk')
-const logger = rewire('../config/logger')
+const {
+  logger,
+  log,
+  getStatusColor,
+  getRequestColor,
+  getMethodColor
+} = require('../config/logger')
+const app = require('../index')
 
 describe('logger specs', () => {
   describe('getStatusColor specs', () => {
-    const getStatusColor = logger.__get__('getStatusColor')
     test('sould return green colord status', () => {
       const data = getStatusColor(200)
       expect(data).toEqual(chalk.green(200))
@@ -25,7 +30,6 @@ describe('logger specs', () => {
     })
   })
   describe('getRequestColor specs', () => {
-    const getRequestColor = logger.__get__('getRequestColor')
     const httpVersion = '1.1'
     test('sould return green colord http version', () => {
       const data = getRequestColor(200, httpVersion)
@@ -45,7 +49,6 @@ describe('logger specs', () => {
     })
   })
   describe('getMethodColor specs', () => {
-    const getMethodColor = logger.__get__('getMethodColor')
     test('sould return green colord method', () => {
       const data = getMethodColor('GET')
       expect(data).toEqual(chalk.green.bold('GET'))
@@ -54,24 +57,55 @@ describe('logger specs', () => {
       const data = getMethodColor('POST')
       expect(data).toEqual(chalk.yellow.bold('POST'))
     })
-    test('sould return blue colord method', () => {
+    test('sould return blue colord method put', () => {
       const data = getMethodColor('PUT')
       expect(data).toEqual(chalk.blue.bold('PUT'))
+    })
+    test('sould return blue colord method patch', () => {
+      const data = getMethodColor('PATCH')
+      expect(data).toEqual(chalk.blue.bold('PATCH'))
     })
     test('sould return red colord method', () => {
       const data = getMethodColor('DELETE')
       expect(data).toEqual(chalk.red.bold('DELETE'))
     })
+    test('sould return red colord other methods', () => {
+      const data = getMethodColor('OTHER')
+      expect(data).toEqual(chalk.cyan.bold('OTHER'))
+    })
   })
   describe('log specs', () => {
-    const log = logger.__get__('log')
-    test('should return without error', () => {
+    test('should return without error for status 200', () => {
       const req = {
         method: 'GET',
         httpVersion: '1.1',
         originalUrl: '/tests'
       }
-      const data = log(req, { statusCode: 200 }, {}, {})
+      const data = log(req, { statusCode: 200 }, { body: {} }, { body: {} })
+      expect(data instanceof Error).toBeFalsy()
+    })
+    test('should return without error for status 400', () => {
+      const req = {
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/tests'
+      }
+      const data = log(req, { statusCode: 400 }, { body: {} }, { body: {} })
+      expect(data instanceof Error).toBeFalsy()
+    })
+    test('should return without error for status 500', () => {
+      const req = {
+        method: 'GET',
+        httpVersion: '1.1',
+        originalUrl: '/tests'
+      }
+      const data = log(req, { statusCode: 500 }, { body: {} }, { body: {} })
+      expect(data instanceof Error).toBeFalsy()
+    })
+  })
+  describe('logger specs', () => {
+    test('should return without error', () => {
+      const data = logger(app)
       expect(data instanceof Error).toBeFalsy()
     })
   })
