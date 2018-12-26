@@ -7,6 +7,16 @@ const app = require('../index')
 
 // async/await can be used.
 describe('misc specs', () => {
+  describe('API success specs', () => {
+    test('should return OK', async (done) => {
+      supertest(app)
+        .get('/api')
+        .expect(httpStatus.OK)
+        .then(() => done())
+        .catch(done)
+    })
+  })
+
   describe('API error specs', () => {
     test('should return API not found!', async (done) => {
       supertest(app)
