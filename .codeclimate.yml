@@ -1,4 +1,4 @@
 exclude_patterns:
-- tests
-- docs
-- node_modules
+- "__test__/"
+- "docs/"
+- "node_modules/"
