@@ -1,4 +1,4 @@
 exclude_patterns:
-- "__test__/"
+- "**/__test__/"
 - "docs/"
 - "node_modules/"
