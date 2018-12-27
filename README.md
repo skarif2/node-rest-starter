@@ -1,7 +1,7 @@
 # Node Rest Starter Kit 
 
 [![Build](https://travis-ci.com/skarif2/node-rest-starter.svg?branch=master)](https://travis-ci.com/skarif2/node-rest-starter)
-[![Coverage](https://coveralls.io/repos/github/skarif2/node-rest-starter/badge.svg?branch=master)](https://coveralls.io/github/skarif2/node-rest-starter?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/skarif2/node-rest-starter/badge.svg)](https://coveralls.io/github/skarif2/node-rest-starter)
 [![Dependencies](https://david-dm.org/skarif2/node-rest-starter/status.svg)](https://david-dm.org/skarif2/node-rest-starter)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6efa84bef371d1d8a145/maintainability)](https://codeclimate.com/github/skarif2/node-rest-starter/maintainability)
 [![Inline docs](http://inch-ci.org/github/skarif2/node-rest-starter.svg?branch=master)](http://inch-ci.org/github/skarif2/node-rest-starter)
