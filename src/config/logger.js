@@ -30,7 +30,6 @@ const logger = (app) => {
 const log = (req, res, reqObj, resObj) => {
   const diff = process.hrtime(req.startAt)
   const resTime = (diff[0] * 1e3 + diff[1] * 1e-6).toFixed(2)
-  consola.log('\n')
   consola.info('req:', reqObj)
   consola.info('res:', resObj)
   if (res.statusCode >= 400 && res.statusCode < 500) {
@@ -62,15 +61,15 @@ const getMethodColor = (method) => {
 
 const getRequestColor = (status, httpVersion) => {
   if (status < 300) {
-    return chalk.black.bgGreen(` HTTP-${httpVersion} `)
+    return chalk.black.bgGreen(` HTTP/${httpVersion} `)
   }
   if (status >= 300 && status < 400) {
-    return chalk.black.bgBlue(` HTTP-${httpVersion} `)
+    return chalk.black.bgBlue(` HTTP/${httpVersion} `)
   }
   if (status >= 400 && status < 500) {
-    return chalk.black.bgYellow(` HTTP-${httpVersion} `)
+    return chalk.black.bgYellow(` HTTP/${httpVersion} `)
   }
-  return chalk.black.bgRed(` HTTP-${httpVersion} `)
+  return chalk.black.bgRed(` HTTP/${httpVersion} `)
 }
 
 const getStatusColor = (status) => {

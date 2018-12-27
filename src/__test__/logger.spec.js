@@ -33,19 +33,19 @@ describe('logger specs', () => {
     const httpVersion = '1.1'
     test('sould return green colord http version', () => {
       const data = getRequestColor(200, httpVersion)
-      expect(data).toEqual(chalk.black.bgGreen(` HTTP-${httpVersion} `))
+      expect(data).toEqual(chalk.black.bgGreen(` HTTP/${httpVersion} `))
     })
     test('sould return blue colord http version', () => {
       const data = getRequestColor(300, httpVersion)
-      expect(data).toEqual(chalk.black.bgBlue(` HTTP-${httpVersion} `))
+      expect(data).toEqual(chalk.black.bgBlue(` HTTP/${httpVersion} `))
     })
     test('sould return yellow colord http version', () => {
       const data = getRequestColor(400, httpVersion)
-      expect(data).toEqual(chalk.black.bgYellow(` HTTP-${httpVersion} `))
+      expect(data).toEqual(chalk.black.bgYellow(` HTTP/${httpVersion} `))
     })
     test('sould return red colord http version', () => {
       const data = getRequestColor(500, httpVersion)
-      expect(data).toEqual(chalk.black.bgRed(` HTTP-${httpVersion} `))
+      expect(data).toEqual(chalk.black.bgRed(` HTTP/${httpVersion} `))
     })
   })
   describe('getMethodColor specs', () => {

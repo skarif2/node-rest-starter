@@ -35,7 +35,7 @@ app.use(bodyParser.json())
  * Setup logging when env.nodeEnv is dev
  */
 if (env.nodeEnv === 'dev') {
-  logger(app)
+  logger.logger(app)
 }
 
 /**
