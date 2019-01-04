@@ -47,11 +47,11 @@ async function create (req, res, next) {
     const sendUser = _.pick(savedUser, ['_id', 'username', 'mobileNumber'])
     return res.json(sendUser)
   } catch (e) {
-    if (e.code && e.code === 11000) {
-      const err = new APIError(e.errmsg, httpStatus.BAD_REQUEST, false)
-      return next(err)
+    let err = e
+    if (err.code && err.code === 11000) {
+      err = new APIError(err.errmsg, httpStatus.BAD_REQUEST, false)
     }
-    return next(e)
+    return next(err)
   }
 }
 
@@ -80,9 +80,8 @@ async function update (req, res, next) {
  * @returns {<User[], Error>}
  */
 async function list (req, res, next) {
-  const { limit = 50, skip = 0 } = req.query
   try {
-    const users = await User.list({ limit, skip })
+    const users = await User.list(req.query)
     return res.json(users)
   } catch (e) {
     next(e)

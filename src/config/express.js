@@ -7,9 +7,9 @@ const crossdomain = require('helmet-crossdomain')
 const methodOverride = require('method-override')
 const validation = require('express-validation')
 const httpStatus = require('http-status')
+const logger = require('@skarif2/logger')
 
 const env = require('./environment')
-const logger = require('./logger')
 const routes = require('../index.route')
 const APIError = require('../libs/APIError')
 
@@ -32,11 +32,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 /**
- * Setup logging when env.nodeEnv is dev
+ * Logger to log request details to console
  */
-if (env.nodeEnv === 'dev') {
-  logger.logger(app)
-}
+app.use(logger())
 
 /**
  * Enables HTTP verbs such as PUT or DELETE in places

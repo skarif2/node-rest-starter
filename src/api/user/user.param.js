@@ -48,8 +48,8 @@ module.exports = {
    */
   list: {
     query: {
-      skip: Joi.string().required(),
-      limit: Joi.string().required()
+      skip: Joi.string(),
+      limit: Joi.string()
     }
   },
 

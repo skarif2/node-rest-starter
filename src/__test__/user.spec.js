@@ -49,11 +49,21 @@ describe('User API specs', () => {
   })
 
   describe('GET /api/users', () => {
-    test('should get all user', async (done) => {
+    test('should return users - with skip, limit', async (done) => {
       const skip = 0
-      const limit = 0
+      const limit = 50
       supertest(app)
         .get(`/api/users?limit=${limit}&skip=${skip}`)
+        .expect(httpStatus.OK)
+        .then((res) => {
+          expect(Array.isArray(res.body)).toBeTruthy()
+          return done()
+        })
+        .catch(done)
+    })
+    test('should return users - without skip, limit', async (done) => {
+      supertest(app)
+        .get(`/api/users`)
         .expect(httpStatus.OK)
         .then((res) => {
           expect(Array.isArray(res.body)).toBeTruthy()
