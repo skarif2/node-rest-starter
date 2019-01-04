@@ -7,20 +7,100 @@
 [![Inline docs](http://inch-ci.org/github/skarif2/node-rest-starter.svg?branch=master)](http://inch-ci.org/github/skarif2/node-r`est-starter)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://img.shields.io/badge/license-MIT-brightgreen.svg)
 
-A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It is written in ES2015/ES6 with all the best practices in the world :blush:
+A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It is written with all the best practices in the world :blush:
 
-## Techniques
-  | Name | Module | Summery |
-  |-|-|-|
-  |Authentication|jsonwebtoken|some summery|
-  |Compression|compression|some summery|
-  |Configuration|dotenv|some summery|
-  |Database|mongoose| some summery|
-  |Http Status Code|http-status|some summery|
-  |Logger|@skarif2/logger|some summery|
-  |Security|helmet, cors|some summery|
-  |Test|jest|some summery|
-  |Validation|joi|some summery|
+## Technologies
+- add techlonogy here
 
+## Getting Started
 
+### **Prerequisites**
+- [Node.js](https://nodejs.org/en/) v10.3.0 or higher to support [ES2018](https://node.green/) syntax.
+- [MongoDB](https://www.mongodb.com/) v3.0.x or higher ([more](https://mongoosejs.com/docs/compatibility.html)).
 
+### **Initial Setup**
+```sh
+# Clone the repo
+$ git clone git@github.com:skarif2/node-rest-starter.git awesomeapi
+
+# Change directory to newly created one
+$ cd awesomeapi
+
+# Install dependencies
+$ npm install
+
+# Setup environment
+$ cp .env.example .env
+
+# Start development server
+$ npm start
+
+# Watch for file changes
+$ npm run start:watch
+
+# Run server in debug mode
+$ npm run start:debug
+```
+
+### **Testing**
+```sh
+# Run tests in normal mode
+$ npm test
+
+# Run tests in watch mode
+$ npm run test:watch
+
+# Generate coverage report for tests
+$ npm run test:coverage
+```
+
+### **Lninting**
+```sh
+# Lint code using ESLint
+$ npm run lint
+```
+
+### **Api Doc**
+```sh
+# Generate documentation for RESTful Api
+$ npm run apidoc
+```
+
+### **Docker**
+```sh
+# Build docker image
+$ docker-compose build
+
+# Start newly built image
+$ docker-compose up
+```
+
+## Directory Structure
+```txt
++
++---docs
++---src
+|   +---__test__
+|   +---api
+|   |   +---auth
+|   |   |      auth.controller.js
+|   |   |      auth.param.js
+|   |   |      auth.route.js
+|   |   +---user
+|   |   |      user.controller.js
+|   |   |      user.model.js
+|   |   |      user.param.js
+|   |   |      user.route.js
+|   +---config
+|   |       environment.js
+|   |       express.js
+|   |       mongoose.js
+|   +---libs
+|   |       APIError.js
+|   |       jwToken.js
+|   +---middleware
+|   |   index.js
+|   |   index.route.js
+|   package.json
+|   .env
+```
