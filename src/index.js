@@ -4,8 +4,8 @@
 const consola = require('consola')
 consola.wrapAll()
 
-const env = require('./config/environment')
 const app = require('./config/express')
+const env = require('./config/environment')
 const mongoose = require('./config/mongoose')
 
 /**

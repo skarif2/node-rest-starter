@@ -29,9 +29,6 @@ const schema = Joi.object({
       then: Joi.boolean().default(true),
       otherwise: Joi.boolean().default(false)
     }),
-  LOG_LEVEL: Joi.string().lowercase().trim()
-    .allow(['error', 'warn', 'info', 'verbose', 'debug', 'silly'])
-    .default('info'),
   JWT_SECRET: Joi.string().required()
     .description('JWT Secret required to sign')
 }).unknown().required()
@@ -54,7 +51,6 @@ const env = {
     port: value.MONGO_PORT,
     debug: value.MONGO_DEBUG
   },
-  logLevel: value.LOG_LEVEL,
   jwtSecret: value.JWT_SECRET
 }
 

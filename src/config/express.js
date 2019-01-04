@@ -1,9 +1,7 @@
-const bodyParser = require('body-parser')
 const compression = require('compression')
 const cors = require('cors')
 const express = require('express')
 const helmet = require('helmet')
-const crossdomain = require('helmet-crossdomain')
 const methodOverride = require('method-override')
 const validation = require('express-validation')
 const httpStatus = require('http-status')
@@ -28,13 +26,15 @@ app.use(compression())
 /**
  * Middleware to parese req.body data
  */
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 /**
- * Logger to log request details to console
+ * Log request details to console
  */
-app.use(logger())
+if (env.nodeEnv !== 'test') {
+  app.use(logger())
+}
 
 /**
  * Enables HTTP verbs such as PUT or DELETE in places
@@ -50,7 +50,6 @@ app.use(cors())
 /**
  * Use helmet to secure Express headers
  */
-app.use(crossdomain())
 app.use(helmet())
 
 /**
@@ -63,9 +62,9 @@ app.use('/api', routes)
  */
 app.use((err, req, res, next) => {
   if (err instanceof validation.ValidationError) {
-    // validation error contains errors which is an array of error each containing message[]
-    const unifiedErrorMessage = err.errors.map(error => error.messages.join('. ')).join(' and ')
-    const error = new APIError(unifiedErrorMessage, err.status, true)
+    // ValidationError is an array of error
+    const messages = err.errors.map(error => error.messages.join('. ')).join(' and ')
+    const error = new APIError(messages, err.status, true)
     return next(error)
   } else if (!(err instanceof APIError)) {
     const apiError = new APIError(err.message, err.status, err.isPublic)
@@ -78,7 +77,7 @@ app.use((err, req, res, next) => {
  * Catch 404 and forward to error handler
  */
 app.use((req, res, next) => {
-  const err = new APIError('API not found!', httpStatus.NOT_FOUND)
+  const err = new APIError('API not found!', httpStatus.NOT_FOUND, false)
   return next(err)
 })
 

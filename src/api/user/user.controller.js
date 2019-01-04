@@ -12,9 +12,9 @@ const salt = bcrypt.genSaltSync(10)
 async function load (req, res, next, id) {
   try {
     req.user = await User.get({ '_id': id })
-    return next()
+    return next();
   } catch (e) {
-    next(e)
+    next(e);
   }
 }
 

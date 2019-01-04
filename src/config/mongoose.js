@@ -12,7 +12,7 @@ Promise = require('bluebird') // eslint-disable-line no-global-assign
 /**
  * plugin bluebird promise in mongoose
  */
-mongoose.Promise = Promise
+mongoose.Promise = require('bluebird')
 
 /**
  * set Username and Password of user
