@@ -5,5 +5,5 @@ module.exports = {
     '<rootDir>/src/index.js'
   ],
   testEnvironment: 'node',
-  verbose: false
+  verbose: true
 }
