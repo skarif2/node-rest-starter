@@ -1,10 +1,7 @@
 language: node_js
 
 node_js:
-  - 10.14.0
-
-# services:
-#   - mongodb
+  - 10.15.0
 
 cache:
   directories:
