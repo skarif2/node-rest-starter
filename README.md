@@ -9,14 +9,19 @@
 
 A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It is written with all the best practices in the world :blush:
 
-## Technologies
-<div>
+<br />
+
+<div align="center">
   <img src="https://user-images.githubusercontent.com/5141132/50723408-8aa4a500-1107-11e9-9fe6-fe5482102bc9.png" height="45" hspace="10">
   <img src="https://user-images.githubusercontent.com/5141132/50723399-7365b780-1107-11e9-9bc4-7706f631c5e8.png" height="45" hspace="10">
   <img src="https://user-images.githubusercontent.com/5141132/50723395-65b03200-1107-11e9-8cfc-03e765c81d8e.png" height="45" hspace="10">
-  <img src="https://user-images.githubusercontent.com/5141132/50726877-3ae0d080-113d-11e9-8298-ac422d21c131.png" height="35" hspace="10">
+  <img src="https://user-images.githubusercontent.com/5141132/50726877-3ae0d080-113d-11e9-8298-ac422d21c131.png" height="32" hspace="10">
   <img src="https://user-images.githubusercontent.com/5141132/50723392-5335f880-1107-11e9-9559-cd725e3c3907.png" height="30" hspace="10">
 </div>
+
+<br />
+
+## Technologies
 
 - [Node.js](https://nodejs.org/en/), [Express](http://expressjs.com/), [Javascript](https://github.com/sorrycc/awesome-javascript), [npm](https://www.npmjs.com/) - core platform
 - [Helmet](https://www.npmjs.com/package/helmet), [compression](https://www.npmjs.com/package/compression), [cors](https://www.npmjs.com/package/cors) - common middlewares
@@ -28,9 +33,6 @@ A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It
 - [Jest](https://jestjs.io/) - unit testing javascript code and api
 - [Husky](https://www.npmjs.com/package/husky) - precommit hooks for git
 - [apiDoc](http://apidocjs.com/) - documentation for RESTful apis
-
-
-
 
 ## Getting Started
 
@@ -136,3 +138,16 @@ $ npm run apidoc
 
 ### Test logs
 <img src="https://user-images.githubusercontent.com/5141132/50728035-25c06d80-114e-11e9-8e72-e85bf5a63bb5.png" align="center">
+
+## Highly Inspired by
+
+- [Express & mongoose REST API Boilerplate in ES6 with Code Coverage](https://github.com/kunalkapadia/express-mongoose-es6-rest-api)
+- [Vue, Express, MongoDB full-stack JS Boilerplate](https://github.com/icebob/vue-express-mongo-boilerplate)
+- [Node.js API Starter Kit](https://github.com/kriasoft/nodejs-api-starter)
+
+## License
+
+This project available under the [MIT license](https://github.com/skarif2/node-rest-starter/blob/master/LICENSE).
+
+---
+<h3 align="center">Made with&nbsp; 💖 &nbsp;by Sk Arif.</h2>
