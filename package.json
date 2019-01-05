@@ -14,7 +14,7 @@
     "npm": ">=6.1.0"
   },
   "dependencies": {
-    "@skarif2/logger": "^0.1.0",
+    "@skarif2/logger": "^0.1.1",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.3",
     "compression": "^1.7.3",
@@ -43,7 +43,6 @@
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "eslint-watch": "2.1.14",
     "husky": "^0.14.3",
     "jest": "^23.6.0",
     "nodemon": "^1.18.9",
@@ -53,11 +52,11 @@
     "start": "node ./src/index.js",
     "start:watch": "nodemon ./src/index.js",
     "start:debug": "node ./src/index.js",
-    "lint": "esw *.js src --color || true",
+    "lint": "eslint --ext=.js src || true",
     "test": "NODE_ENV=test MONGO_HOST=mongodb://localhost/nrs-test jest",
     "test:watch": "NODE_ENV=test MONGO_HOST=mongodb://localhost/nrs-test jest --watch",
     "test:coverage": "NODE_ENV=test MONGO_HOST=mongodb://localhost/nrs-test jest --coverage",
-    "precommit": "esw *.js src --color && npm run test",
+    "precommit": "eslint --ext=.js src && npm run test",
     "apidoc": "apidoc -i ./src -f .route.js -o ./docs"
   },
   "apidoc": {
