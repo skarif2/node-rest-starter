@@ -11,7 +11,7 @@ extends:
   - plugin:jest/recommended
 rules:
   no-param-reassign: error
-  no-empty: warn
+  no-empty: error
   node/no-unpublished-require: 0
   promise/no-callback-in-promise: 0
   jest: true
