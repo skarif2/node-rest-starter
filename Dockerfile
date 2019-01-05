@@ -1,5 +1,5 @@
 # Use latest node version 10.x
-FROM node:10.14.0
+FROM node:10.15.0
 
 # Create app directory in container
 RUN mkdir -p /app
