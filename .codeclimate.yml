@@ -2,3 +2,4 @@ exclude_patterns:
 - "**/__test__/"
 - "docs/"
 - "node_modules/"
+- "coverage/"
