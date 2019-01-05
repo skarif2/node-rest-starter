@@ -6,6 +6,9 @@ npm-debug.log*
 # Coverage directory used by tools like istanbul
 coverage
 
+# Docs directory (if generated)
+docs
+
 # Dependency directories
 node_modules
 
@@ -13,6 +16,8 @@ node_modules
 .npm
 
 # Usless config files
-.travis.yml
+.codeclimate.yml
+.coveralls.yml
 .eslintrc.yml
 .env.template
+.travis.yml
