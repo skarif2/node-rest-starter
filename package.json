@@ -1,7 +1,7 @@
 {
   "name": "node-rest-starter",
   "description": "A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": "Sk Arif <skarif2@gmail.com>",
   "license": "MIT",
   "repository": "github:skarif2/node-rest-starter",
@@ -60,7 +60,7 @@
     "apidoc": "apidoc -i ./src -f .route.js -o ./docs"
   },
   "apidoc": {
-    "title": "Node REST Starter",
+    "title": "Node Rest Starter",
     "url": "https://localhost"
   }
 }

@@ -10,13 +10,33 @@
 A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB. It is written with all the best practices in the world :blush:
 
 ## Technologies
-- add techlonogy here
+<div>
+  <img src="https://user-images.githubusercontent.com/5141132/50723408-8aa4a500-1107-11e9-9fe6-fe5482102bc9.png" height="45" hspace="10">
+  <img src="https://user-images.githubusercontent.com/5141132/50723399-7365b780-1107-11e9-9bc4-7706f631c5e8.png" height="45" hspace="10">
+  <img src="https://user-images.githubusercontent.com/5141132/50723395-65b03200-1107-11e9-8cfc-03e765c81d8e.png" height="45" hspace="10">
+  <img src="https://user-images.githubusercontent.com/5141132/50726877-3ae0d080-113d-11e9-8298-ac422d21c131.png" height="35" hspace="10">
+  <img src="https://user-images.githubusercontent.com/5141132/50723392-5335f880-1107-11e9-9559-cd725e3c3907.png" height="30" hspace="10">
+</div>
+
+- [Node.js](https://nodejs.org/en/), [Express](http://expressjs.com/), [Javascript](https://github.com/sorrycc/awesome-javascript), [npm](https://www.npmjs.com/) - core platform
+- [Helmet](https://www.npmjs.com/package/helmet), [compression](https://www.npmjs.com/package/compression), [cors](https://www.npmjs.com/package/cors) - common middlewares
+- [MongoDB](https://www.mongodb.com/), [Mongoose](https://mongoosejs.com/) - database and schema modeling
+- [JWT](https://www.npmjs.com/package/jsonwebtoken), [express-jwt](https://www.npmjs.com/package/express-jwt) - generate and validate access token
+- [Joi](https://www.npmjs.com/package/joi), [express-validation](https://www.npmjs.com/package/express-validation) - param validation
+- [Consola](https://www.npmjs.com/package/consola), [Logger](https://www.npmjs.com/package/@skarif2/logger) - better console logging stuff
+- [ESLint](https://eslint.org/) - check and fix linting of code
+- [Jest](https://jestjs.io/) - unit testing javascript code and api
+- [Husky](https://www.npmjs.com/package/husky) - precommit hooks for git
+- [apiDoc](http://apidocjs.com/) - documentation for RESTful apis
+
+
+
 
 ## Getting Started
 
 ### **Prerequisites**
 - [Node.js](https://nodejs.org/en/) v10.3.0 or higher to support [ES2018](https://node.green/) syntax.
-- [MongoDB](https://www.mongodb.com/) v3.0.x or higher ([more](https://mongoosejs.com/docs/compatibility.html)).
+- [MongoDB](https://www.mongodb.com/) v3.0.x or higher [[more](https://mongoosejs.com/docs/compatibility.html)].
 
 ### **Initial Setup**
 ```sh
@@ -54,16 +74,10 @@ $ npm run test:watch
 $ npm run test:coverage
 ```
 
-### **Lninting**
+### **Linting**
 ```sh
 # Lint code using ESLint
 $ npm run lint
-```
-
-### **Api Doc**
-```sh
-# Generate documentation for RESTful Api
-$ npm run apidoc
 ```
 
 ### **Docker**
@@ -73,6 +87,14 @@ $ docker-compose build
 
 # Start newly built image
 $ docker-compose up
+```
+
+### **Api Doc**
+Inline documentation for RESTful APIs. ApiDoc creates a documentation from API annotations in the source code. [[more](http://apidocjs.com/)]
+ApiDoc [demo](https://skarif2.github.io/node-rest-starter/) for this repo.
+```sh
+# Generate documentation for RESTful Api
+$ npm run apidoc
 ```
 
 ## Directory Structure
@@ -104,3 +126,13 @@ $ docker-compose up
 |   package.json
 |   .env
 ```
+
+## Development Screenshots
+
+### API logs
+<img src="https://user-images.githubusercontent.com/5141132/50728024-ff9acd80-114d-11e9-9f17-dd8ca5a161b4.png" align="center">
+<img src="https://user-images.githubusercontent.com/5141132/50728026-0d505300-114e-11e9-83d0-a80b99862977.png" align="center">
+<img src="https://user-images.githubusercontent.com/5141132/50728030-193c1500-114e-11e9-8202-08c0a3250d23.png" align="center">
+
+### Test logs
+<img src="https://user-images.githubusercontent.com/5141132/50728035-25c06d80-114e-11e9-8e72-e85bf5a63bb5.png" align="center">
