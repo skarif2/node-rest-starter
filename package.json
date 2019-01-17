@@ -1,7 +1,7 @@
 {
   "name": "node-rest-starter",
   "description": "A boilerplate for creating RESTful APIs in Node.js using Express and MongoDB.",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "author": "Sk Arif <skarif2@gmail.com>",
   "license": "MIT",
   "repository": "github:skarif2/node-rest-starter",
