@@ -1,5 +1,6 @@
-const Joi = require('joi')
+const Validator = require('fastest-validator')
 const dotenv = require('dotenv').config()
+const v = new Validator()
 
 /**
  * Error on unsuccessful loading of .env
@@ -11,47 +12,35 @@ if (dotenv.error) {
 /**
  * Validation schema for .env
  */
-const schema = Joi.object({
-  APP_NAME: Joi.string()
-    .default('node-rest-starter'),
-  NODE_ENV: Joi.string().lowercase().trim()
-    .allow(['dev', 'prod', 'test', 'stage'])
-    .default('dev'),
-  PORT: Joi.number()
-    .default(9100),
-  MONGO_HOST: Joi.string().required()
-    .description('Mongo DB host url'),
-  MONGO_PORT: Joi.string().required()
-    .description('Mongo DB port'),
-  MONGO_DEBUG: Joi.boolean()
-    .when('NODE_ENV', {
-      is: Joi.string().equal('dev'),
-      then: Joi.boolean().default(true),
-      otherwise: Joi.boolean().default(false)
-    }),
-  JWT_SECRET: Joi.string().required()
-    .description('JWT Secret required to sign')
-}).unknown().required()
+const schema = {
+  'APP_NAME': { type: 'string', max: 20 },
+  'APP_ENV': { type: 'enum', values: ['dev', 'prod', 'test', 'stage'] },
+  'APP_PORT': { type: 'string', min: 4, max: 5 },
+  'MONGO_HOST': { type: 'string' },
+  'MONGO_DEBUG': { type: 'enum', values: ['true', 'false'] },
+  'JWT_SECRET': { type: 'string' }
+}
 
-const { error, value } = Joi.validate(process.env, schema)
+const value = v.validate(process.env, schema)
 
-if (error) {
-  throw new Error(`.env validation error: ${error.message}`)
+if (value !== true) {
+  throw new Error(`.env validation error: ${value}`)
 }
 
 /**
  * Const to contain validated env vers
  */
 const env = {
-  appName: value.APP_NAME,
-  nodeEnv: value.NODE_ENV,
-  port: value.PORT,
-  mongo: {
-    host: value.MONGO_HOST,
-    port: value.MONGO_PORT,
-    debug: value.MONGO_DEBUG
+  app: {
+    name: process.env.APP_NAME,
+    env: process.env.APP_ENV,
+    port: process.env.APP_PORT
   },
-  jwtSecret: value.JWT_SECRET
+  mongo: {
+    host: process.env.MONGO_HOST,
+    debug: process.env.MONGO_DEBUG
+  },
+  jwtSecret: process.env.JWT_SECRET
 }
 
 module.exports = env

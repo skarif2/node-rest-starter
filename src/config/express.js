@@ -16,7 +16,7 @@ const app = express()
 /**
  * Set application port to listen to
  */
-app.set('port', env.port)
+app.set('port', env.app.port)
 
 /**
  * Middleware to compress respose bodies
@@ -32,7 +32,7 @@ app.use(express.json())
 /**
  * Log request details to console
  */
-if (env.nodeEnv !== 'test') {
+if (env.app.env !== 'test') {
   app.use(logger())
 }
 
@@ -87,7 +87,7 @@ app.use((err, req, res, next) => {
 app.use((err, req, res, next) => {
   res.status(err.status).json({
     message: err.isPublic ? err.message : httpStatus[err.status],
-    stack: env.nodeEnv === 'dev' ? err.stack : {}
+    stack: env.app.env === 'dev' ? err.stack : {}
   })
 })
 

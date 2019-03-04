@@ -32,7 +32,8 @@
     "jsonwebtoken": "8.5.0",
     "lodash": "4.17.11",
     "method-override": "3.0.0",
-    "mongoose": "5.4.16"
+    "mongoose": "5.4.16",
+    "progress": "^2.0.3"
   },
   "devDependencies": {
     "apidoc": "0.17.7",
@@ -54,9 +55,9 @@
     "start:watch": "nodemon ./src/index.js",
     "start:debug": "node ./src/index.js",
     "lint": "eslint --ext=.js src || true",
-    "test": "NODE_ENV=test MONGO_HOST=mongodb://localhost/nrs-test jest",
-    "test:watch": "NODE_ENV=test MONGO_HOST=mongodb://localhost/nrs-test jest --watch",
-    "test:coverage": "NODE_ENV=test MONGO_HOST=mongodb://localhost/nrs-test jest --coverage",
+    "test": "APP_ENV=test MONGO_HOST=mongodb://localhost/nrs-test jest",
+    "test:watch": "APP_ENV=test MONGO_HOST=mongodb://localhost/nrs-test jest --watch",
+    "test:coverage": "APP_ENV=test MONGO_HOST=mongodb://localhost/nrs-test jest --coverage",
     "precommit": "eslint --ext=.js src && npm run test",
     "apidoc": "apidoc -i ./src -f .route.js -o ./docs"
   },
