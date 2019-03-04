@@ -20,3 +20,6 @@ __logs__
 
 # .DS_Store
 .DS_Store
+
+# package-lock file
+package-lock.json
