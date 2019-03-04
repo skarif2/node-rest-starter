@@ -58,6 +58,14 @@ app.use(helmet())
 app.use('/api', routes)
 
 /**
+ * Catch 404 and forward to error handler
+ */
+app.use((req, res, next) => {
+  const err = new APIError('API not found!', httpStatus.NOT_FOUND, false)
+  return next(err)
+})
+
+/**
  * If error is not an instanceOf APIError, convert it.
  */
 app.use((err, req, res, next) => {
@@ -70,14 +78,6 @@ app.use((err, req, res, next) => {
     const apiError = new APIError(err.message, err.status, err.isPublic)
     return next(apiError)
   }
-  return next(err)
-})
-
-/**
- * Catch 404 and forward to error handler
- */
-app.use((req, res, next) => {
-  const err = new APIError('API not found!', httpStatus.NOT_FOUND, false)
   return next(err)
 })
 
