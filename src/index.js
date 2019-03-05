@@ -8,20 +8,14 @@ const mongoose = require('./config/mongoose')
  */
 if (env.app.env !== 'test') {
   mongoose.connection.on('connected', () => {
-    consola.ready({
-      message: 'MongoDB',
-      badge: true
-    })
+    consola.success('MongoDB')
     app.listen(env.app.port, () => {
-      consola.ready({
-        message: `${env.app.name} Server`,
-        badge: true
-      })
-      consola.log('-------------------------------------------------')
+      consola.success(`env.app.name} Server`)
+      consola.log('--------------------------------------------------')
       consola.info(`Environment: ${env.app.env}`)
       consola.info(`Port: ${env.app.port}`)
-      consola.info(`Base uri: http://localhost:${env.app.port}/api`)
-      consola.info(`Mongo uri: ${env.mongo.host}`)
+      consola.info(`Base Url: http://localhost/api`)
+      consola.info(`Mongo Url: ${env.mongo.host}`)
     })
   })
 }

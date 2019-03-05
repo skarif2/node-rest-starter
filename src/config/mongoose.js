@@ -1,13 +1,7 @@
 const mongoose = require('mongoose')
 const util = require('util')
 const debug = require('debug')('node-rest-starter:index')
-
 const env = require('./environment')
-
-/**
- * make bluebird default Promise
- */
-Promise = require('bluebird') // eslint-disable-line no-global-assign
 
 /**
  * plugin bluebird promise in mongoose
@@ -28,10 +22,9 @@ const mongoOption = {
 /**
  * connect to mongo db
  */
-const mongoUri = env.mongo.host
-mongoose.connect(mongoUri, mongoOption)
+mongoose.connect(env.mongo.host, mongoOption)
 mongoose.connection.on('error', () => {
-  throw new Error(`Unable to connect to database: ${mongoUri}`)
+  throw new Error(`Unable to connect to database: ${env.mongo.host}`)
 })
 
 /**
